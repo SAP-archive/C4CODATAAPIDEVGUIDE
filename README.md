@@ -1,16 +1,12 @@
 ## SAP Cloud for Customer OData API Developer's Guide
 The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](add link) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
-This guide assumes that you already have some basic knowledge of [OData](http://www.odata.org). If not, you may find the following resource useful:
-want to start with [SAP Cloud for Customer OData API Getting Started Guide](add link).
+For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Getting Started Guide](add link).
 
 ### What is OData protocol?
-Open Data (OData) Protocol is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides both metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats to querying and modifying data.
+[Open Data (OData) Protocol](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=odata) is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL for a relational database system (RDBMS) as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats for querying and modifying data.
 
-In the rest of this blog, I will cover some of the more commonly used OData features as part of my examples.
-
-For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials.
-
+For more information on OData please refer to [http://www.odata.org] where you can find detailed documentation and tutorials. 
 ### Consuming OData Services
 As a RESTful API, an OData service can easily be consumed via a web browser for retrieving data. However, in order to create or update data, a REST client is needed. Among many others, two of such tools are Advanced REST Client and Postman as extensions to Chrome Browser. Similar tools are also available for Firefox. If you prefer standalone apps you can consider SoapUI or Cocoa Rest Client. **Please note that none of these tools are provided, supported nor endorsed by SAP**.
 
