@@ -12,7 +12,10 @@ For more information on OData please refer to [http://www.odata.org]() where you
 SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [http://www.odata.org/documentation/odata-version-2-0/](here).
 
 ### SAP Cloud for Customer (C4C) OData Services
-You can try the examples shown in this document by accessing the OData API of your C4C tenant. Alternatively, for purely testing purposes, you can also use the following URL:
+You can try the examples shown in this document by accessing the OData API of your C4C tenant using the following URL pattern:
+[https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection]() where myNNNNNN is your tenant name.
+
+Here is an example URL for a test tenant:
 [https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/]()
 
 
