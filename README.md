@@ -1,7 +1,10 @@
-# SAP Cloud for Customer OData API Developer's Guide
-The SAP Cloud for Customer OData API Developer’s Guide complements the SAP Cloud for Customer OData API Reference (a link will be provided later) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
+## SAP Cloud for Customer OData API Developer's Guide
+The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](add link) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
-Consuming SAP Sales for Customer OData APIs
+This guide assumes that you already have some basic knowledge of [OData](http://www.odata.org). If not, you may find the following resource useful:
+want to start with [SAP Cloud for Customer OData API Getting Started Guide](add link).
+
+### Consuming SAP Sales for Customer OData APIs
 In late 2014, SAP Cloud for Customer released an OData service to allow bidirectional access to SAP Cloud for Customer (C4C) data. In this blog, I will provide examples for querying, creating and updating SAP Sales for Customer data. Furthermore, I will also provide a brief introduction and additional resources for those who are new to OData protocol.
 
 SAP Cloud for Customer OData service documentation is available in SAP online help.
