@@ -6,17 +6,17 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 ### What is OData protocol?
 [Open Data (OData) Protocol](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=odata) is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL for a relational database system (RDBMS) as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats for querying and modifying data.
 
-For more information on OData please refer to [http://www.odata.org](http://www.odata.org) where you can find detailed documentation and tutorials. 
+For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials. 
 
 ### OData versions
-SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [http://www.odata.org/documentation/odata-version-2-0](here).
+SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [here](http://www.odata.org/documentation/odata-version-2-0/).
 
 ### SAP Cloud for Customer (C4C) OData Services
 You can try the examples shown in this document by accessing the OData API of your C4C tenant using the following URL pattern:
-[https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection]() where myNNNNNN is the name of your tenant.
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection where myNNNNNN is the name of your tenant.
 
 Here is an example URL for a test tenant:
-[https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/](https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/)
+`https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/`
 
 ### Service Metadata
 OData service metadata is retrieved by opening the following URL.
