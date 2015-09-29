@@ -15,11 +15,35 @@ SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (w
 You can try the examples shown in this document by accessing the OData API of your C4C tenant using the following URL pattern:
 
 `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
+
 where myNNNNNN is the name of your tenant.
 
 Here is an example URL for a test tenant:
 
 `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/`
+
+### OData service catalog
+OData Service Catalog contains the list of available OData Services in the corresponding SAP CLoud for Customer tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
+
+`https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
+
+The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](add link).
+
+### Authentication
+SAP Cloud for Customer OData API supports two different authentication mechanisms:
+
+* Basic Authentication (username and password pair)
+* OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client here.)
+
+#### SAP standard services vs. Custom services
+
+SAP Cloud for customer product, offers an OData Service Explorer, using which one can view the standard servcies that are shipped by SAP (e.g. /c4codata/) as well as model tenant specific custom services. From an API point of view the custom services behave exactly the same way as a standard service does. Only the URL paths for the services are different:
+
+Standard services have the URL path - https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....
+Custom services have the URL path - https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...
+
+
+
 
 ### Service Metadata
 OData service metadata is retrieved by opening the following URL.
