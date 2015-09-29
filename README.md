@@ -4,37 +4,28 @@ The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cl
 This guide assumes that you already have some basic knowledge of [OData](http://www.odata.org). If not, you may find the following resource useful:
 want to start with [SAP Cloud for Customer OData API Getting Started Guide](add link).
 
-### Consuming SAP Sales for Customer OData APIs
-In late 2014, SAP Cloud for Customer released an OData service to allow bidirectional access to SAP Cloud for Customer (C4C) data. In this blog, I will provide examples for querying, creating and updating SAP Sales for Customer data. Furthermore, I will also provide a brief introduction and additional resources for those who are new to OData protocol.
-
-SAP Cloud for Customer OData service documentation is available in SAP online help.
-
-What is OData protocol?
+### What is OData protocol?
 Open Data (OData) Protocol is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides both metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats to querying and modifying data.
 
 In the rest of this blog, I will cover some of the more commonly used OData features as part of my examples.
 
 For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials.
 
-Consuming OData Services
-As a RESTful API, an OData service can easily be consumed via a web browser for retrieving data. However, in order to create or update data, a REST client is needed. Among many others, two of such tools are Advanced REST Client and Postman as extensions to Chrome Browser. Similar tools are also available for Firefox. If you prefer standalone apps you can consider SoapUI or Cocoa Rest Client. Please note that none of these tools are provided, supported nor endorsed by SAP.
+### Consuming OData Services
+As a RESTful API, an OData service can easily be consumed via a web browser for retrieving data. However, in order to create or update data, a REST client is needed. Among many others, two of such tools are Advanced REST Client and Postman as extensions to Chrome Browser. Similar tools are also available for Firefox. If you prefer standalone apps you can consider SoapUI or Cocoa Rest Client. **Please note that none of these tools are provided, supported nor endorsed by SAP**.
 
-SAP Cloud for Customer (C4C) OData Services
+### SAP Cloud for Customer (C4C) OData Services
 In the rest of this document, I will be using the AccountCollection of the SAP Cloud for Customer OData service. In order to repeat the examples shown below, you will need to have access to a C4C tenant. 
 
-Service Metadata
+### Service Metadata
 OData service metadata is retrieved by opening the following URL.
 
 https://<c4c_tenant>/sap/c4c/odata/v1/c4codata/$metadata - where you need to replace <c4c_tenant> with the domain of your C4C tenant (e.g. my123456.crm.ondemand.com).
 
-
-
-OData Service Document
+### OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
 
 https://<c4c_tenant>/sap/c4c/odata/v1/c4codata/ (Please note at the time of writing this blog, ‘/’ at the end of the URI is required!)
-
-
 
 To get the same information in JSON format, you need to add $format=json into your query. (i.e. https://<c4c_tenant>/sap/c4c/odata/v1/c4codata/?format=json )
 
@@ -44,11 +35,6 @@ In order to retrieve complete list of accounts (i.e. customer records), one can 
 https://<c4c_tenant>/sap/c4c/odata/v1/c4codata/AccountCollection
 
 Once the required username and password is provided, a result page similar to the following is seen:
-
-
-
-
-
 
 
 Query Options
