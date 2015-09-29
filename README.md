@@ -6,13 +6,13 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 ### What is OData protocol?
 [Open Data (OData) Protocol](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=odata) is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL for a relational database system (RDBMS) as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats for querying and modifying data.
 
-For more information on OData please refer to [http://www.odata.org] where you can find detailed documentation and tutorials. 
+For more information on OData please refer to [http://www.odata.org]() where you can find detailed documentation and tutorials. 
 ### Consuming OData Services
 As a RESTful API, an OData service can easily be consumed via a web browser for retrieving data. However, in order to create or update data, a REST client is needed. Among many others, two of such tools are Advanced REST Client and Postman as extensions to Chrome Browser. Similar tools are also available for other browsers. If you prefer a standalone apps you can also consider SoapUI or Cocoa Rest Client. **Please note that none of these tools are provided, supported nor endorsed by SAP**.
 
 ### SAP Cloud for Customer (C4C) OData Services
 You can try the examples shown in this document by accessing the OData API of your C4C tenant. Alternatively, for purely testing purposes, you can also use the following URL:
-[https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/]
+[https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/]()
 
 
 ### Service Metadata
