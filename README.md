@@ -69,14 +69,16 @@ e.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$m
 ### Making HTTP Requests
 #### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
-  * For HTTP GET requests, use the system query parameter `$format=json`. E.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json` will return `{"d":{"EntitySets":["ODataServiceCollection"]}}`
-  * For HTTP POST/PATCH/PUT requests, set the HTTP `Content-Type` header to `application/json`.
+* For HTTP GET requests, use the system query parameter `$format=json`. E.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json` will return `{"d":{"EntitySets":["ODataServiceCollection"]}}`
+* For HTTP POST/PATCH/PUT requests, set the HTTP `Content-Type` header to `application/json`.
 
 
 ##### Authentication
-All HTTP requests should have an `Authorization` header.
-  * For Basic authentication this should be `Authorization: Basic _base64_encoded_value_of_username:password_`
-  * For OAuth SAML bearer flow this should be `Authorization: Bearer _OAuth_token_` 
+All HTTP requests should have an `Authorization` header. Please use the formats below;
+* For Basic authentication 
+`Authorization: Basic _base64_encoded_value_of_username:password_`
+* For OAuth SAML bearer flow 
+`Authorization: Bearer _OAuth_token_` 
 
 In the above text, please ensure the space between `Basic`, `Bearer` and the values following them respectively.
 
