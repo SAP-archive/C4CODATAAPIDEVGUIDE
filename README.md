@@ -54,9 +54,9 @@ The following URL pattern differetiates the Standard and Custom OData services.
 ### OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
 
-`https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/` (Please note at the time of writing this blog, ‘/’ at the end of the URI is required!)
+`https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/` (Please note that ‘/’ character at the end of the URI is required!)
 
-- where myNNNNNN is the name of your C4C tenant.
+where myNNNNNN is the name of your C4C tenant.
 
 ### OData Service Metadata
 OData service metadata is retrieved via the following URL.
