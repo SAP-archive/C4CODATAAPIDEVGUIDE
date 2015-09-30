@@ -80,7 +80,7 @@ All HTTP requests should have an `Authorization` header. Please use the formats 
 * For OAuth SAML bearer flow 
 `Authorization: Bearer _OAuth_token_` 
 
-In the above text, please ensure the space between `Basic`, `Bearer` and the values following them respectively.
+In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
 ##### X-CSRF Token
 For modifying HTTP methods (POST/PUT/PATCH) in addition to the Authorization header it is also required to specify an X-CSRF token. In order to receive an X-CSRF token, please follow the steps below:
