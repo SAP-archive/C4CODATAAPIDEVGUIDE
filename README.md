@@ -12,7 +12,7 @@ For more information on OData please refer to http://www.odata.org where you can
 SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [here](http://www.odata.org/documentation/odata-version-2-0/).
 
 ### SAP Cloud for Customer (C4C) OData Services
-You can try the examples shown in this document by accessing the OData API of your C4C tenant using the following URL pattern:
+You can try the examples shown in this document by accessing the OData API of your SAP Cloud for Customer (C4C) tenant using the following URL pattern:
 
 `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
 
@@ -23,7 +23,7 @@ Here is an example URL for a test tenant:
 `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/`
 
 ### OData service catalog
-OData Service Catalog contains the list of available OData Services in the corresponding SAP CLoud for Customer tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
+OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
 `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
 
@@ -33,7 +33,7 @@ The catalog service returns both standard OData services delivered by SAP as wel
 SAP Cloud for Customer OData API supports two different authentication mechanisms:
 
 * Basic Authentication (username and password pair)
-* OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client here.)
+* OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client [here](OAuthSAMLClient).)
 
 #### SAP standard services vs. Custom services
 
