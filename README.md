@@ -89,7 +89,7 @@ Please follow the steps below to receive a CSRF token:
 
 ```
 	X-CSRF-Token: Fetch
-```.
+```
 
 2. After a successful call, the C4C server will respond with the expected response payload and a CSRF token response in the respective response `X-CSRF-Token`. Here is an example CSRF Token returned as part of the response header 
 
