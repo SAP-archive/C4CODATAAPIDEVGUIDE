@@ -48,8 +48,8 @@ Standard and custom OData services offer the same capabilities and, are subjecte
 The following URL pattern differetiates the Standard and Custom OData services.
 
 
-Standard services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....`
-Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
+* Standard services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....`
+* Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
 
 ### OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
