@@ -22,7 +22,7 @@ Here is an example URL for a test tenant:
 
 `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/`
 
-### OData service catalog
+### OData Service Catalog
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
 `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
@@ -34,6 +34,8 @@ SAP Cloud for Customer OData API supports two different authentication mechanism
 
 * Basic Authentication (username and password pair)
 * OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client [here](OAuthSAMLClient).)
+
+Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
 #### SAP Standard vs. Custom OData Services
 
@@ -56,19 +58,19 @@ OData service document contains the list of OData entities (a.k.a. collections) 
 
 - where myNNNNNN is the name of your C4C tenant.
 
-### Service Metadata
-OData service metadata is retrieved by opening the following URL.
+### OData Service Metadata
+OData service metadata is retrieved via the following URL.
 
 `https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata`
+
+e.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata`
 
 
 ### Making HTTP Requests
 #### Formats
-SAP Cloud for Customer OData API support request payloads in both Atom XML and JSON format. The default payload format is AtomXML. To use JSON payloads the following needs to be done:
-  * For the GET requests - use the system query parameter **$format=json**. E.g. to get the above mentioed ODataServiceCollection in JSON format you have to use https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection?$format=json
-  * For the POST/PATCH/PUT requests use the HTTP Content-Type header. (**Content-Type: application/json**)
-
-
+SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
+  * For HTTP GET requests, use the system query parameter `$format=json`. E.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json` will return `{"d":{"EntitySets":["ODataServiceCollection"]}}`
+  * For HTTP POST/PATCH/PUT requests, set the HTTP `Content-Type` header to `application/json`.
 
 
 #####Authentication
