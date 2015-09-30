@@ -14,18 +14,24 @@ SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (w
 ### SAP Cloud for Customer (C4C) OData Services
 You can try the examples shown in this document by accessing the OData API of your SAP Cloud for Customer (C4C) tenant using the following URL pattern:
 
-`https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
+```
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
+```
 
 where myNNNNNN is the name of your tenant.
 
 Here is an example URL for a test tenant:
 
-`https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/`
+```
+https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/
+```
 
 ### OData Service Catalog
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
-`https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection`
+```
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
+```
 
 The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](add link).
 
@@ -54,14 +60,18 @@ The following URL pattern differetiates the Standard and Custom OData services.
 ### OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
 
-`https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/` (Please note that ‘/’ character at the end of the URI is required!)
+```
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/ (Please note that ‘/’ character at the end of the URI is required!)
+```
 
 where myNNNNNN is the name of your C4C tenant.
 
 ### OData Service Metadata
 OData service metadata is retrieved via the following URL.
 
-`https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata`
+```
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata
+```
 
 e.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata`
 
@@ -69,7 +79,19 @@ e.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$m
 ### Making HTTP Requests
 #### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
-* For HTTP GET requests, use the system query parameter `$format=json`. E.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json` will return `{"d":{"EntitySets":["ODataServiceCollection"]}}`
+* For HTTP GET requests, use the system query parameter `$format=json`. 
+
+Example:
+```
+https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json
+```
+
+will return 
+
+```
+{"d":{"EntitySets":["ODataServiceCollection"]}}
+```
+
 * For HTTP POST/PATCH/PUT requests, set the HTTP `Content-Type` header to `application/json`.
 
 
@@ -85,18 +107,17 @@ In order to prevent possible [Cross-site request forgery](https://en.wikipedia.o
 
 Please follow the steps below to receive a CSRF token:
 
-1. Perform an HTTP GET to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP header
+* First, perform an HTTP GET to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP header
 
 ```
 	X-CSRF-Token: Fetch
 ```
 
-2. After a successful call, the C4C server will respond with the expected response payload and a CSRF token response in the respective response `X-CSRF-Token`. Here is an example CSRF Token returned as part of the response header 
+* After a successful call, the C4C server will respond with the expected response payload and a CSRF token response in the respective response `X-CSRF-Token`. Here is an example CSRF Token returned as part of the response header 
 
 ```
 	x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==
 ```
-
 
 The token value retrieved above needs to be used for subsequent modifying HTTP requests (like POST/PUT/PATCH).
 
