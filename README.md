@@ -61,10 +61,10 @@ The following URL pattern differetiates the Standard and Custom OData services.
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
 
 ```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/ (Please note that ‘/’ character at the end of the URI is required!)
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/ 
 ```
 
-where myNNNNNN is the name of your C4C tenant.
+where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
 
 ### OData Service Metadata
 OData service metadata is retrieved via the following URL.
@@ -101,6 +101,8 @@ All HTTP requests should have an `Authorization` header. Please use the formats 
 * For OAuth SAML bearer flow `Authorization: Bearer _OAuth_token_` 
 
 In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
+
+Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
 ##### CSRF Token
 In order to prevent possible [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks, SAP Cloud for Customer OData API requires all modifying HTTP requests (POST/PUT/PATCH) to specify a CSRF token, in addition to the Authorization header.
