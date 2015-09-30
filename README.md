@@ -67,21 +67,38 @@ e.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$m
 
 
 ### Making HTTP Requests
-#### Formats
+#### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
   * For HTTP GET requests, use the system query parameter `$format=json`. E.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json` will return `{"d":{"EntitySets":["ODataServiceCollection"]}}`
   * For HTTP POST/PATCH/PUT requests, set the HTTP `Content-Type` header to `application/json`.
 
 
-#####Authentication
-All requests should have an Authoriation header.
-  * For Basic authentication this should be **Authorization: Basic _base64_encoded_value_of_username:password_**
-  * For OAuth SAML bearer flow this should be **Authorization: Bearer _OAuth_token_** (note the space between Bearer and the actual OAuth token)
+##### Authentication
+All HTTP requests should have an `Authorization` header.
+  * For Basic authentication this should be `Authorization: Basic _base64_encoded_value_of_username:password_`
+  * For OAuth SAML bearer flow this should be `Authorization: Bearer _OAuth_token_` 
 
-#####CSRF Token
-For modifying methods (POST/PUT/PATCH) in addition to the Authorization header it is also mandatory to specify a CSRF token as well. Now the question arises as to how can you get a CSRF token. The following steps need to be undertaken to fetch a CSRF token that can be used to make the modifying calls:
+In the above text, please ensure the space between `Basic`, `Bearer` and the values following them respectively.
+
+##### X-CSRF Token
+For modifying HTTP methods (POST/PUT/PATCH) in addition to the Authorization header it is also required to specify an X-CSRF token. In order to receive an X-CSRF token, please follow the steps below:
   * First perform a GET to the service end-point (e.g. invoke the $metadata end-point https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/$metadata). For this call, pass the header (in addition to the Authorization header) **X-CSRF-Token**. The value for this HTTP header should be **Fetch**.
   * The C4C server will respond back with the EDM metadata (of course since this is what is being requested by the GET call), in addition it would also send a **Response header** called **X-CSRF-Token** (same name as what was sent) and this will have a token value. The token value needs to be used for subsequent calls (like POST/PUT/PATCH).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #####Server side paging
 For GET requests, if no query options are specified, the server enforces paging to provide better performance. Currently the page size is fixed at 1000 entries. However at the end of 1000 entries the server includes a **next** link that allows the caller to get the next 1000 entries. The link would be something like this:
