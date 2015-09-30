@@ -87,8 +87,8 @@ In order to prevent possible [Cross-site request forgery](https://en.wikipedia.o
 
 Please follow the steps below to receive a CSRF token:
 
-1. First perform an HTTP GET to the service end-point (e.g. invoke the $metadata end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/$metadata`) with the HTTP header `X-CSRF-Token: Fetch`.
-2. After a successful call, the C4C server will respond with the expected response payload and a CSRF token response in the respective response `X-CSRF-Token`. Here is an example CSRF Token returned as part of the response header `x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==`
+1. Perform an HTTP GET to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP header ```X-CSRF-Token: Fetch```.
+2. After a successful call, the C4C server will respond with the expected response payload and a CSRF token response in the respective response `X-CSRF-Token`. Here is an example CSRF Token returned as part of the response header ```x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==```
 
 The token value retrieved above needs to be used for subsequent modifying HTTP requests (like POST/PUT/PATCH).
 
