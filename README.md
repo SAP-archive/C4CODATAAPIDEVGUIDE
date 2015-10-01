@@ -1,17 +1,17 @@
-## SAP Cloud for Customer OData API Developer's Guide
+# SAP Cloud for Customer OData API Developer's Guide
 The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](add link) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
 For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Getting Started Guide](add link).
 
-### What is OData protocol?
+## What is OData protocol?
 [Open Data (OData) Protocol](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=odata) is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL for a relational database system (RDBMS) as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats for querying and modifying data.
 
 For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials. 
 
-### OData versions
+## OData versions
 SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [here](http://www.odata.org/documentation/odata-version-2-0/).
 
-### SAP Cloud for Customer (C4C) OData Services
+## SAP Cloud for Customer (C4C) OData Services
 You can try the examples shown in this document by accessing the OData API of your SAP Cloud for Customer (C4C) tenant using the following URL pattern:
 
 ```
@@ -26,7 +26,7 @@ Here is an example URL for a test tenant:
 https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/
 ```
 
-### OData Service Catalog
+## OData Service Catalog
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
 ```
@@ -35,7 +35,7 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServ
 
 The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](add link).
 
-### Authentication
+## Authentication
 SAP Cloud for Customer OData API supports two different authentication mechanisms:
 
 * Basic Authentication (username and password pair)
@@ -43,7 +43,7 @@ SAP Cloud for Customer OData API supports two different authentication mechanism
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
-#### SAP Standard vs. Custom OData Services
+## SAP Standard vs. Custom OData Services
 
 SAP Cloud for Customer provides a standard OData API. In addition, SAP Cloud for Customer also allows customers to build their own (custom) OData services based on the predefined business objects in the solution.
 
@@ -57,7 +57,7 @@ The following URL pattern differetiates the Standard and Custom OData services.
 * Standard services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....`
 * Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
 
-### OData Service Document
+## OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
 
 ```
@@ -66,18 +66,21 @@ https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/
 
 where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
 
-### OData Service Metadata
+## OData Service Metadata
 OData service metadata is retrieved via the following URL.
 
 ```
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata
 ```
 
-e.g. `https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata`
+Example:
 
+```
+https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata
+```
 
-### Making HTTP Requests
-#### Supported Formats
+## Making HTTP Requests
+### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
 * For HTTP GET requests, use the system query parameter `$format=json`. 
 
@@ -92,62 +95,88 @@ will return
 {"d":{"EntitySets":["ODataServiceCollection"]}}
 ```
 
-* For HTTP POST/PATCH/PUT requests, set the HTTP `Content-Type` header to `application/json`.
+* For HTTP POST/PATCH/PUT requests with JSON payload, set the HTTP `Content-Type` header as below:
+
+```
+Content-Type: application/json
+```
+
+### Authentication
+All HTTP requests should have an `Authorization` header. 
 
 
-##### Authentication
-All HTTP requests should have an `Authorization` header. Please use the formats below;
-* For Basic authentication `Authorization: Basic _base64_encoded_value_of_username:password_`
-* For OAuth SAML bearer flow `Authorization: Bearer _OAuth_token_` 
+Authentication Method |HTTP Header
+-------|---------
+Basic authentication | `Authorization: Basic _base64_encoded_value_of_username:password_`
+OAuth SAML bearer flow  | `Authorization: Bearer _OAuth_token_` 
 
 In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
-##### CSRF Token
+### CSRF Token
 In order to prevent possible [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks, SAP Cloud for Customer OData API requires all modifying HTTP requests (POST/PUT/PATCH) to specify a CSRF token, in addition to the Authorization header.
 
 Please follow the steps below to receive a CSRF token:
 
-* First, perform an HTTP GET to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP header
+First, perform an HTTP GET request to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP request header:
 
 ```
-	X-CSRF-Token: Fetch
+	x-csrf-token: fetch
 ```
 
-* After a successful call, the C4C server will respond with the expected response payload and a CSRF token response in the respective response `X-CSRF-Token`. Here is an example CSRF Token returned as part of the response header 
+After a successful call, the C4C server will respond with the expected response payload and a CSRF token in the respective response `X-CSRF-Token`. 
+
+Here is an example CSRF Token returned as part of the response header 
 
 ```
 	x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==
 ```
 
-The token value retrieved above needs to be used for subsequent modifying HTTP requests (like POST/PUT/PATCH).
+The token value retrieved above needs to be used for subsequent modifying HTTP requests (i.e. POST/PUT/PATCH).
 
+###Server side paging
+For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
 
+If there are more than 1000 entries, the server includes a `<link re"next" href="...` element that can be used to retrieve the next 1000 entries. 
 
+Here is an excerpt with the **next** link:
 
-
-
-
-
-
-
-
-#####Server side paging
-For GET requests, if no query options are specified, the server enforces paging to provide better performance. Currently the page size is fixed at 1000 entries. However at the end of 1000 entries the server includes a **next** link that allows the caller to get the next 1000 entries. The link would be something like this:
+```XML
+...
+				<d:StartDate>2012-08-25T00:00:00</d:StartDate>
+				<d:StatusCode>6</d:StatusCode>
+				<d:StatusCodeText>Converted</d:StatusCodeText>
+				<d:UUID>00163E03-A070-1EE2-8BE6-D1A72CF7B7D6</d:UUID>
+			</m:properties>
+		</content>
+	</entry>
+	<link rel="next" href="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/LeadCollection/?$skiptoken=1001"/>
+</feed>
 ```
-https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection?$format=json&$skiptoken=1001 
-```
-(in this specific case the OpportunityCollection entity set is being queried).
 
-####Sample client
+(in this specific case the LeadCollection entity set is being queried).
+
+
+
+
+#To be continued....
+
+
+
+
+
+
+
+
+###Sample client
 If you are looking for sample Java client that can be used for making OData calls to C4C you can go [here](https://github.com/venkyvb/ODataConsumerSample). Note that this sample uses Apache Olingo library to construct and read OData payloads.
 
 ###OData feature support
 As mentioned above, SAP Cloud for customer supports V2 version of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For sake of brevity, the initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata is skipped in the following examples:
 
 
-####System Query Options
+###System Query Options
 
 Option | Example | Description
 -------|---------|------------
