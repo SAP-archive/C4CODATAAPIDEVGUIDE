@@ -1,0 +1,7 @@
+/target/
+
+
+# Generated folders
+*/.settings/
+*/.project
+*/.classpath

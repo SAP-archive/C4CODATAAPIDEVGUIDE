@@ -97,7 +97,7 @@ will return
 
 * For HTTP POST/PATCH/PUT requests with JSON payload, set the HTTP `Content-Type` header as below:
 
-```HTTP
+```
 Content-Type: application/json
 ```
 
@@ -121,7 +121,7 @@ Please follow the steps below to receive a CSRF token:
 
 First, perform an HTTP GET request to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP request header:
 
-```HTTP
+```
 	x-csrf-token: fetch
 ```
 
@@ -129,7 +129,7 @@ After a successful call, the C4C server will respond with the expected response 
 
 Here is an example CSRF Token returned as part of the response header 
 
-```HTTP
+```
 	x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==
 ```
 
