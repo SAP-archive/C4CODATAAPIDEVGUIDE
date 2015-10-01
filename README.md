@@ -157,20 +157,14 @@ Here is an excerpt with the **next** link:
 
 (in this specific case the LeadCollection entity set is being queried).
 
+###Sample Java Client
+A sample Java client demonstrating how to make OData calls to C4C is available [here](ODataConsumerSample). Note that this sample uses Apache Olingo library to construct and read OData payloads.
 
 
 
-#To be continued....
+# to be continued...
 
 
-
-
-
-
-
-
-###Sample client
-If you are looking for sample Java client that can be used for making OData calls to C4C you can go [here](https://github.com/venkyvb/ODataConsumerSample). Note that this sample uses Apache Olingo library to construct and read OData payloads.
 
 ###OData feature support
 As mentioned above, SAP Cloud for customer supports V2 version of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For sake of brevity, the initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata is skipped in the following examples:
