@@ -91,7 +91,7 @@ https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatal
 
 will return 
 
-```
+```JSON
 {"d":{"EntitySets":["ODataServiceCollection"]}}
 ```
 
