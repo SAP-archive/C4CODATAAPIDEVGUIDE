@@ -97,7 +97,7 @@ will return
 
 * For HTTP POST/PATCH/PUT requests with JSON payload, set the HTTP `Content-Type` header as below:
 
-```
+```HTTP
 Content-Type: application/json
 ```
 
