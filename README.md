@@ -158,86 +158,94 @@ Here is an excerpt with the **next** link:
 (in this specific case the LeadCollection entity set is being queried).
 
 ###Sample Java Client
-A sample Java client demonstrating how to make OData calls to C4C is available [here](ODataConsumerSample). Note that this sample uses Apache Olingo library to construct and read OData payloads.
+A sample Java client demonstrating how to make OData calls to C4C is available [here](ODataConsumerSample). The sample uses Apache Olingo library to construct and read OData payloads.
 
+###Supported System Query Options
+As stated above, SAP Cloud for Customer supports version 2 of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For brevity, initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata is skipped in the following examples:
 
-
-# to be continued...
-
-
-
-###OData feature support
-As mentioned above, SAP Cloud for customer supports V2 version of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For sake of brevity, the initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata is skipped in the following examples:
-
-
-###System Query Options
-
-Option | Example | Description
+Query Option | Example | Description
 -------|---------|------------
-$format  | /OpportunityCollection?$format=json | Returns Opportunity entries in JSON format with server side paging
-$top |  /OpportunityCollection?$top=10 | Returns top 2 Opportunities. 'Top 2' is defined by server logic here
-$skip | /OpportunityCollection?$skip=10 | Skips the first 10 entries and then returns the rest
-$select | /OpportunityCollection?$select=OpportunityID,AccountID | Returns Opportunity entries but only 2 attributes OpportunityID and AccountID
-$orderby | /OpportunityCollection?$orderby=CloseDate desc&$top=10 | First performs an orderby on the Opportunities and then selects the top 10 from that ordered list. Here **desc** means descending order.
-$count | /OpportunityCollection/$count | Returns the total number of Opportunities
-$inlinecount | /OpportunityCollection?$top=10&$inlinecount=allpages | Returns the top 10 opportunities and also returns the total number of opportunities.
+**$batch** | /$batch | Perform several OData query, create, update or delete operations with a single HTTP POST call.
+**$count** | /OpportunityCollection/$count | Returns the total number of Opportunities
+**$format**  | /OpportunityCollection?$format=json | Returns Opportunity entries in JSON format with server side paging
+**$inlinecount** | /OpportunityCollection?$top=10&$inlinecount=allpages | Returns the top 10 opportunities and also returns the total number of opportunities.
+**$orderby** | /OpportunityCollection?$orderby=CloseDate desc&$top=10 | First performs an orderby on the Opportunities and then selects the top 10 from that ordered list. Here **desc** means descending order.
+**$search** | /CustomerCollection?$search='Porter' | Returns Customer entries with at least one of the search enabled fields contain the word 'Porter'
+**$select** | /OpportunityCollection?$select=OpportunityID,AccountID | Returns Opportunity entries but only 2 attributes OpportunityID and AccountID
+**$skip** | /OpportunityCollection?$skip=10 | Skips the first 10 entries and then returns the rest
+**$top** |  /OpportunityCollection?$top=10 | Returns top 2 Opportunities. 'Top 2' is defined by server logic here
 
+Below you will find additional details for some of the system query options.
 
-#####$inlinecount response payload
+####$batch
+Used to query, create/update multiple entities with explicit transaction boundaries specified via Changesets as a part of the payload
 
-XML response with inlinecount. The Element <m:count> contains the response to the $inlinecount.
+The following example;
+- retrieves top 3 entries from the ServiceRequestCollection (of the requestservice OData service)
+- updates a few properties of a ServiceRequest entry
+- creates a new ServiceRequestItem
+
+Note: Please make sure to leave two blank lines after HTTP GET operations (as seen in the example below)
+
 ```XML
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/c4codata/">
-	<id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection</id>
-	<title type="text">OpportunityCollection</title>
-	<updated>2015-08-23T17:30:32Z</updated>
-	<author>
-		<name/>
-	</author>
-	<link href="OpportunityCollection" rel="self" title="OpportunityCollection"/>
-	<m:count>39080</m:count>
-	<entry>
-		<id>https://myNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</id>
-		<title type="text">OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</title>
-		<updated>2015-08-23T17:30:32Z</updated>
-		....
-```
+POST /sap/c4c/odata/v1/servicerequest/$batch HTTP/1.1
+Host: myNNNNNN.crm.ondemand.com
+Content-Type: multipart/mixed; boundary=batch_guid_01
+Content-Length: 1000
+Authorization: Basic <base64encoded(user:pass)>
+x-csrf-token: <a_valid_csrf_token>
 
-JSON response with inlinecount. The attribute __count contains the response to the $inlinecount.
-```JSON
+--batch_guid_01
+Content-Type: application/http
+Content-Transfer-Encoding:binary
+
+GET ServiceRequestCollection/?$top=3 HTTP/1.1
+
+
+--batch_guid_01
+Content-Type: multipart/mixed; boundary=changeset_guid_01
+
+--changeset_guid_01
+Content-Type: application/http
+Content-Transfer-Encoding: binary
+
+PATCH ServiceRequestCollection('00163E0DBD9E1ED596EBDFDA564728AC') HTTP/1.1
+Content-Type: application/json
+Content-ID: 1
+Content-Length: 10000
+
 {
-  "d": {
-    "__count": "39080", 
-    "results": [
-      {
-        "AccountID": "10009", 
-        "AccountName": {
-          "__metadata": {
-            "type": "http://sap.com/xi/AP/CRM/Global.ENCRYPTED_LONG_Name"
-          }, 
-          "content": "Primo Sustainable products", 
-          "languageCode": "E"
-        }, 
-        ...
+	"ServiceRequestUserLifeCycleStatusCode" : "YJ",
+	"ScheduledStartDate" : "2015-10-22T00:00:00",
+	"ScheduledEndDate" : "2015-10-22T00:00:00",
+	"ScheduledStartTime" : "PT13H00M00S",
+	"ScheduledEndTime" : "PT15H00M00S"
+}
+
+--changeset_guid_01
+Content-Type: application/http 
+Content-Transfer-Encoding: binary 
+
+POST ServiceRequestItemCollection HTTP/1.1
+Content-Type: application/json
+Content-ID: 2
+Content-Length: 10000
+
+{
+    "Description": "1m water hose",
+    "ParentObjectID": "00163E0DBD9E1ED596EBDFDA564728AC",
+    "ProductID": "10000760"
+}
+
+--changeset_guid_01-- 
+--batch_guid_01--
 ```
 
-#####$filter
+####$expand
 
-Option | Example | Description
--------|---------|------------
-eq | /OpportunityCollection?$filter=AccountID eq '1001910' | Gets all Opportunity entries that matches the specified AccountID
-endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
-startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
+C4C OData API's support for $expand system query option is via Navigaton Properties. 
 
-For usage of $expand with $filter see the $expand section below.
-
-#####$expand
-
-C4C supports $expand option via Navigaton Properties. E.g. 
-```
-/AccountCollection?$top=10&$format=json&$expand=AccountMainAddress
-```
-Here AccountMainAddress is a Navigation Property defined in the EDM for the Account Entity (see the Entity defintion below).
+E.g. `/AccountCollection?$top=10&$format=json&$expand=AccountMainAddress` Where AccountMainAddress is a Navigation Property defined in the Entity Data Model (EDM) for the Account Entity (see the Entity defintion below).
 
 ```XML
 			<EntityType Name="Account">
@@ -259,16 +267,20 @@ Here AccountMainAddress is a Navigation Property defined in the EDM for the Acco
 			</EntityType>
 ```			
 
-For every entity (that is not a Header entity e.g. Account or Opportunity etc.) the C4C Odata framework implicitly generates a Navigation Property to the parent entity as well as a Navigation Property to the Header entity (if the parent entity is not a Header itself). If you consider the metadata below, the following can be seen:
+For every entity (that is not a Header entity e.g. Account or Opportunity etc.) the C4C OData framework implicitly generates a Navigation Property to the parent entity as well as a Navigation Property to the Header entity (if the parent entity is not a Header itself). 
+
+If you consider the metadata below, the following can be seen:
+
   * Opportunity is the Header entity
   * OpportunityItem has the Opportunity as the Parent (as well as the Header) and 
   * OpportunityItemRevenuePlanReporting has OpportunityItem as the Parent and Opportunity as the Header entity
 
 For each of the entities below, a Navigation Property is available that allows a given Entity type to navigate to the immediate parent e.g. OpportunityItemRevenuePlanReporting has a 
+
   * Navigation Property Opportunity that allows navigation to the Header and 
   * Navigation Property OpportunityItem that allows navigation to the Parent.
 
-This pattern holds good for all OData services generated by C4C (both standard as well as custom services).
+This pattern holds true for all OData services generated by C4C (both standard as well as custom services).
 
 ```XML
 			<EntityType Name="Opportunity">
@@ -314,10 +326,66 @@ This pattern holds good for all OData services generated by C4C (both standard a
 				<NavigationProperty Name="OpportunityItem" Relationship="cust.OpportunityItem_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItemRevenuePlanReporting" ToRole="OpportunityItem"/>
 			</EntityType>
 ```			
-Note that C4C currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions. In order to do this the only option available is to apply the $filter condition at the child entity collection and then use an $expand condition to navigate to either the Parent collection or to the Header collection. 
-E.g. if the requirement is to get all Opportunities that have a certain Product, as a part of a single GET request, then the way of doing this would be to make the following call:
+Please note that C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions. However, this can be achieved by applying the $filter condition at the child entity collection and then use an $expand condition to navigate to either the Parent collection or to the Header collection. 
+E.g. if the requirement is to get all Opportunities that have a certain Product, as a part of a single GET request, this could be achieved with the following query call:
+
 ```
 /OpportunityItemCollection?$format=json&$filter=ProductID eq 'P300104'&$expand=Opportunity
+```
+
+
+####$filter
+
+Option | Example | Description
+-------|---------|------------
+eq | /OpportunityCollection?$filter=AccountID eq '1001910' | Gets all Opportunity entries that matches the specified AccountID
+endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
+startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
+
+For usage of $expand with $filter see the $expand section below.
+
+
+
+
+
+####$inlinecount
+
+XML response with inlinecount. The Element <m:count> contains the response to the $inlinecount.
+
+```XML
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/c4codata/">
+	<id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection</id>
+	<title type="text">OpportunityCollection</title>
+	<updated>2015-08-23T17:30:32Z</updated>
+	<author>
+		<name/>
+	</author>
+	<link href="OpportunityCollection" rel="self" title="OpportunityCollection"/>
+	<m:count>39080</m:count>
+	<entry>
+		<id>https://myNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</id>
+		<title type="text">OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</title>
+		<updated>2015-08-23T17:30:32Z</updated>
+		....
+```
+
+JSON response with inlinecount. The attribute __count contains the response to the $inlinecount.
+
+```JSON
+{
+  "d": {
+    "__count": "39080", 
+    "results": [
+      {
+        "AccountID": "10009", 
+        "AccountName": {
+          "__metadata": {
+            "type": "http://sap.com/xi/AP/CRM/Global.ENCRYPTED_LONG_Name"
+          }, 
+          "content": "Primo Sustainable products", 
+          "languageCode": "E"
+        }, 
+        ...
 ```
 
 #####$search
