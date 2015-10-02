@@ -79,6 +79,21 @@ Example:
 https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata
 ```
 
+####Supported HTTP operations
+
+C4C OData API supports the following OData/HTTP operations:
+
+Operation | Description
+----------|------------
+GET | Used to retrieve a single entity instance or multiple entity instances
+POST | Used to create entity instances
+PUT | Used to **completely** replace/overwrite and existing entity instance
+PATCH | Used to replace/overwrite existing entity instance. The key difference between PUT and PATCH is that PUT overwrites the complete entity whereas PATCH only updates **only** attributes of the entity that are part of the payload
+DELETE | Used to delete an entity record
+$batch | Used to perform multiple query, create, update and delete operations with explicit transaction boundaries specified via Changesets as a part of the payload
+Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
+
+
 ## Making HTTP Requests
 ### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
@@ -800,19 +815,6 @@ The following example shows the usage of the $search:
 ```
 https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollection?$search='Porter'
 ```
-
-####Support for other OData/HTTP operations
-
-C4C OData API support the following OData/HTTP operations (in addition to GET):
-
-Operation | Description
-----------|------------
-POST | Used to create entity instances
-PUT | Used to **completely** replace/overwrite and existing entity instance
-PATCH | Used to replace/overwrite existing entity instance. The key difference between PUT and PATCH is that PUT overwrites the complete entity whereas PATCH only updates **only** attributes of the entity that are part of the payload
-$batch | Used to create/update multiple entities with explicit transaction boundaries specified via Changesets as a part of the payload
-Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
-
 
 ###Sample Payloads
 
