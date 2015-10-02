@@ -241,6 +241,410 @@ Content-Length: 10000
 --batch_guid_01--
 ```
 
+Here is the response received for the above $batch call:
+
+```XML
+--ejjeeffe0
+Content-Type: application/http
+Content-Length: 18616
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 200 OK
+Content-Type: application/atom+xml;type=feed
+Content-Length: 18503
+dataserviceversion: 2.0
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/" xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+    <id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/ServiceRequestCollection</id>
+    <title type="text">ServiceRequestCollection</title>
+    <updated>2015-10-02T23:43:16Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="ServiceRequestCollection" rel="self" title="ServiceRequestCollection"/>
+    <entry>
+        <id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')</id>
+        <title type="text">ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')</title>
+        <updated>2015-10-02T23:43:16Z</updated>
+        <category term="servicerequest.ServiceRequest" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')" rel="edit" title="ServiceRequest"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')/AddressSnapshotPostalAddress" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/AddressSnapshotPostalAddress" type="application/atom+xml;type=feed" title="AddressSnapshotPostalAddress"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')/ServiceRequestAttachmentFolder" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestAttachmentFolder" type="application/atom+xml;type=feed" title="ServiceRequestAttachmentFolder"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')/ServiceRequestBusinessTransactionDocumentReference" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestBusinessTransactionDocumentReference" type="application/atom+xml;type=feed" title="ServiceRequestBusinessTransactionDocumentReference"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')/ServiceRequestDescription" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestDescription" type="application/atom+xml;type=feed" title="ServiceRequestDescription"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')/ServiceRequestItem" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestItem" type="application/atom+xml;type=feed" title="ServiceRequestItem"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28A8644CF8D83AE76')/ServiceRequestTextCollection" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestTextCollection" type="application/atom+xml;type=feed" title="ServiceRequestTextCollection"/>
+        <content type="application/xml">
+            <m:properties>
+                <d:ActivityCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ActivityCategoryName>
+                <d:ActivityServiceIssueCategoryID/>
+                <d:ApprovalStatusCode/>
+                <d:ApprovalStatusCodeText/>
+                <d:AssignedTechnician/>
+                <d:AssignedTo>8000000207</d:AssignedTo>
+                <d:CauseCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:CauseCategoryName>
+                <d:CauseServiceIssueCategoryID/>
+                <d:ChangedBy>Eddie Wright</d:ChangedBy>
+                <d:CompletedOnDate m:null="true"/>
+                <d:CompletionDueDate>2012-11-08T00:00:00</d:CompletionDueDate>
+                <d:Contact/>
+                <d:ContractID/>
+                <d:CreatedBy>Eddie Wright</d:CreatedBy>
+                <d:CreationDate>2012-11-06T00:00:00</d:CreationDate>
+                <d:Customer>AgileX</d:Customer>
+                <d:CustomerID>1000077</d:CustomerID>
+                <d:DataOriginTypeCode>1</d:DataOriginTypeCode>
+                <d:DataOriginTypeCodeText>Manual data entry</d:DataOriginTypeCodeText>
+                <d:DiagnosticTest>false</d:DiagnosticTest>
+                <d:ID>2</d:ID>
+                <d:IncidentCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:IncidentCategoryName>
+                <d:IncidentServiceIssueCategoryID/>
+                <d:InitialResponseDate m:null="true"/>
+                <d:InitialReviewDueDate>2012-11-06T00:00:00</d:InitialReviewDueDate>
+                <d:InstallationPointID/>
+                <d:InstalledBaseID/>
+                <d:ItemListServiceRequestExecutionLifeCycleStatusCode>1</d:ItemListServiceRequestExecutionLifeCycleStatusCode>
+                <d:ItemListServiceRequestExecutionLifeCycleStatusCodeText>Open</d:ItemListServiceRequestExecutionLifeCycleStatusCodeText>
+                <d:LastChangeDate>2012-11-06T00:00:00</d:LastChangeDate>
+                <d:LastResponseOnDate m:null="true"/>
+                <d:Name>Monarch bike enquiry</d:Name>
+                <d:NextResponseDueDate m:null="true"/>
+                <d:ObjectCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ObjectCategoryName>
+                <d:ObjectID>00163E03A0701ED28A8644CF8D83AE76</d:ObjectID>
+                <d:ObjectServiceIssueCategoryID/>
+                <d:Partner/>
+                <d:PartnerID/>
+                <d:ProcessingTypeCode>SRRQ</d:ProcessingTypeCode>
+                <d:ProcessingTypeCodeText>Service Request</d:ProcessingTypeCodeText>
+                <d:ProductCategoryDescription/>
+                <d:ProductID/>
+                <d:ReferenceDate m:null="true"/>
+                <d:ReportedForEmail/>
+                <d:ReportedForPartyID/>
+                <d:ReporterEmail/>
+                <d:ReporterPartyID/>
+                <d:RequestAssignmentStatusCode>1</d:RequestAssignmentStatusCode>
+                <d:RequestAssignmentStatusCodeText>Processor Action</d:RequestAssignmentStatusCodeText>
+                <d:RequestedEnd/>
+                <d:RequestedEndTimeZoneCode/>
+                <d:RequestedStart/>
+                <d:RequestedStartTimeZoneCode/>
+                <d:SalesTerritoryID/>
+                <d:ScheduledEndDate m:null="true"/>
+                <d:ScheduledEndTime>PT00H00M00S</d:ScheduledEndTime>
+                <d:ScheduledStartDate m:null="true"/>
+                <d:ScheduledStartTime>PT00H00M00S</d:ScheduledStartTime>
+                <d:SerialID/>
+                <d:ServiceAndSupportTeam>S3110</d:ServiceAndSupportTeam>
+                <d:ServiceCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ServiceCategoryName>
+                <d:ServiceIssueCategoryID/>
+                <d:ServiceLevelAgreement/>
+                <d:ServicePriorityCode>3</d:ServicePriorityCode>
+                <d:ServicePriorityCodeText>Normal</d:ServicePriorityCodeText>
+                <d:ServiceRequestClassificationCode/>
+                <d:ServiceRequestClassificationCodeText/>
+                <d:ServiceRequestLifeCycleStatusCode>1</d:ServiceRequestLifeCycleStatusCode>
+                <d:ServiceRequestLifeCycleStatusCodeText>Open</d:ServiceRequestLifeCycleStatusCodeText>
+                <d:ServiceRequestUserLifeCycleStatusCode>1</d:ServiceRequestUserLifeCycleStatusCode>
+                <d:ServiceRequestUserLifeCycleStatusCodeText>Open</d:ServiceRequestUserLifeCycleStatusCodeText>
+                <d:ServiceTechnician/>
+                <d:ServiceTechnicianTeam/>
+                <d:Technician/>
+                <d:WarrantyDescription/>
+                <d:WarrantyFrom m:null="true"/>
+                <d:WarrantyTo m:null="true"/>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')</id>
+        <title type="text">ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')</title>
+        <updated>2015-10-02T23:43:16Z</updated>
+        <category term="servicerequest.ServiceRequest" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')" rel="edit" title="ServiceRequest"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')/AddressSnapshotPostalAddress" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/AddressSnapshotPostalAddress" type="application/atom+xml;type=feed" title="AddressSnapshotPostalAddress"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')/ServiceRequestAttachmentFolder" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestAttachmentFolder" type="application/atom+xml;type=feed" title="ServiceRequestAttachmentFolder"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')/ServiceRequestBusinessTransactionDocumentReference" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestBusinessTransactionDocumentReference" type="application/atom+xml;type=feed" title="ServiceRequestBusinessTransactionDocumentReference"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')/ServiceRequestDescription" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestDescription" type="application/atom+xml;type=feed" title="ServiceRequestDescription"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')/ServiceRequestItem" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestItem" type="application/atom+xml;type=feed" title="ServiceRequestItem"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC5A0FD')/ServiceRequestTextCollection" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestTextCollection" type="application/atom+xml;type=feed" title="ServiceRequestTextCollection"/>
+        <content type="application/xml">
+            <m:properties>
+                <d:ActivityCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ActivityCategoryName>
+                <d:ActivityServiceIssueCategoryID/>
+                <d:ApprovalStatusCode/>
+                <d:ApprovalStatusCodeText/>
+                <d:AssignedTechnician/>
+                <d:AssignedTo>8000000207</d:AssignedTo>
+                <d:CauseCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:CauseCategoryName>
+                <d:CauseServiceIssueCategoryID/>
+                <d:ChangedBy>Eddie Wright</d:ChangedBy>
+                <d:CompletedOnDate>2012-07-20T00:00:00</d:CompletedOnDate>
+                <d:CompletionDueDate>2012-07-25T00:00:00</d:CompletionDueDate>
+                <d:Contact>Catherine Lesjak</d:Contact>
+                <d:ContractID/>
+                <d:CreatedBy>Eddie Wright</d:CreatedBy>
+                <d:CreationDate>2012-11-23T00:00:00</d:CreationDate>
+                <d:Customer>HP</d:Customer>
+                <d:CustomerID>10332</d:CustomerID>
+                <d:DataOriginTypeCode>1</d:DataOriginTypeCode>
+                <d:DataOriginTypeCodeText>Manual data entry</d:DataOriginTypeCodeText>
+                <d:DiagnosticTest>false</d:DiagnosticTest>
+                <d:ID>1423</d:ID>
+                <d:IncidentCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:IncidentCategoryName>
+                <d:IncidentServiceIssueCategoryID/>
+                <d:InitialResponseDate>2012-07-20T00:00:00</d:InitialResponseDate>
+                <d:InitialReviewDueDate>2012-07-20T00:00:00</d:InitialReviewDueDate>
+                <d:InstallationPointID/>
+                <d:InstalledBaseID/>
+                <d:ItemListServiceRequestExecutionLifeCycleStatusCode>1</d:ItemListServiceRequestExecutionLifeCycleStatusCode>
+                <d:ItemListServiceRequestExecutionLifeCycleStatusCodeText>Open</d:ItemListServiceRequestExecutionLifeCycleStatusCodeText>
+                <d:LastChangeDate>2014-08-15T00:00:00</d:LastChangeDate>
+                <d:LastResponseOnDate m:null="true"/>
+                <d:Name>System issue at HP</d:Name>
+                <d:NextResponseDueDate m:null="true"/>
+                <d:ObjectCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ObjectCategoryName>
+                <d:ObjectID>00163E03A0701ED28DABB39DFBC5A0FD</d:ObjectID>
+                <d:ObjectServiceIssueCategoryID/>
+                <d:Partner/>
+                <d:PartnerID/>
+                <d:ProcessingTypeCode>SRRQ</d:ProcessingTypeCode>
+                <d:ProcessingTypeCodeText>Service Request</d:ProcessingTypeCodeText>
+                <d:ProductCategoryDescription>B2C - Travel</d:ProductCategoryDescription>
+                <d:ProductID>P110100</d:ProductID>
+                <d:ReferenceDate m:null="true"/>
+                <d:ReportedForEmail/>
+                <d:ReportedForPartyID/>
+                <d:ReporterEmail>c.lesjak@HP.COM</d:ReporterEmail>
+                <d:ReporterPartyID>1000394</d:ReporterPartyID>
+                <d:RequestAssignmentStatusCode>2</d:RequestAssignmentStatusCode>
+                <d:RequestAssignmentStatusCodeText>Requestor Action</d:RequestAssignmentStatusCodeText>
+                <d:RequestedEnd/>
+                <d:RequestedEndTimeZoneCode/>
+                <d:RequestedStart/>
+                <d:RequestedStartTimeZoneCode/>
+                <d:SalesTerritoryID/>
+                <d:ScheduledEndDate m:null="true"/>
+                <d:ScheduledEndTime>PT00H00M00S</d:ScheduledEndTime>
+                <d:ScheduledStartDate m:null="true"/>
+                <d:ScheduledStartTime>PT00H00M00S</d:ScheduledStartTime>
+                <d:SerialID/>
+                <d:ServiceAndSupportTeam>S3110</d:ServiceAndSupportTeam>
+                <d:ServiceCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode>E</d:languageCode>
+                    <d:content>Product Support</d:content>
+                </d:ServiceCategoryName>
+                <d:ServiceIssueCategoryID>PS</d:ServiceIssueCategoryID>
+                <d:ServiceLevelAgreement>CLOUDFORSERVICE_STANDARD</d:ServiceLevelAgreement>
+                <d:ServicePriorityCode>3</d:ServicePriorityCode>
+                <d:ServicePriorityCodeText>Normal</d:ServicePriorityCodeText>
+                <d:ServiceRequestClassificationCode/>
+                <d:ServiceRequestClassificationCodeText/>
+                <d:ServiceRequestLifeCycleStatusCode>3</d:ServiceRequestLifeCycleStatusCode>
+                <d:ServiceRequestLifeCycleStatusCodeText>Completed</d:ServiceRequestLifeCycleStatusCodeText>
+                <d:ServiceRequestUserLifeCycleStatusCode>5</d:ServiceRequestUserLifeCycleStatusCode>
+                <d:ServiceRequestUserLifeCycleStatusCodeText>Completed</d:ServiceRequestUserLifeCycleStatusCodeText>
+                <d:ServiceTechnician>John Smith</d:ServiceTechnician>
+                <d:ServiceTechnicianTeam/>
+                <d:Technician/>
+                <d:WarrantyDescription/>
+                <d:WarrantyFrom m:null="true"/>
+                <d:WarrantyTo m:null="true"/>
+            </m:properties>
+        </content>
+    </entry>
+    <entry>
+        <id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')</id>
+        <title type="text">ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')</title>
+        <updated>2015-10-02T23:43:16Z</updated>
+        <category term="servicerequest.ServiceRequest" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')" rel="edit" title="ServiceRequest"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')/AddressSnapshotPostalAddress" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/AddressSnapshotPostalAddress" type="application/atom+xml;type=feed" title="AddressSnapshotPostalAddress"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')/ServiceRequestAttachmentFolder" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestAttachmentFolder" type="application/atom+xml;type=feed" title="ServiceRequestAttachmentFolder"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')/ServiceRequestBusinessTransactionDocumentReference" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestBusinessTransactionDocumentReference" type="application/atom+xml;type=feed" title="ServiceRequestBusinessTransactionDocumentReference"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')/ServiceRequestDescription" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestDescription" type="application/atom+xml;type=feed" title="ServiceRequestDescription"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')/ServiceRequestItem" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestItem" type="application/atom+xml;type=feed" title="ServiceRequestItem"/>
+        <link href="ServiceRequestCollection('00163E03A0701ED28DABB39DFBC660FD')/ServiceRequestTextCollection" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestTextCollection" type="application/atom+xml;type=feed" title="ServiceRequestTextCollection"/>
+        <content type="application/xml">
+            <m:properties>
+                <d:ActivityCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ActivityCategoryName>
+                <d:ActivityServiceIssueCategoryID/>
+                <d:ApprovalStatusCode/>
+                <d:ApprovalStatusCodeText/>
+                <d:AssignedTechnician/>
+                <d:AssignedTo>8000000197</d:AssignedTo>
+                <d:CauseCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:CauseCategoryName>
+                <d:CauseServiceIssueCategoryID/>
+                <d:ChangedBy>Juliane Beyer</d:ChangedBy>
+                <d:CompletedOnDate>2012-06-09T00:00:00</d:CompletedOnDate>
+                <d:CompletionDueDate>2012-06-13T00:00:00</d:CompletionDueDate>
+                <d:Contact>Frank Sander</d:Contact>
+                <d:ContractID/>
+                <d:CreatedBy>Eddie Wright</d:CreatedBy>
+                <d:CreationDate>2012-11-23T00:00:00</d:CreationDate>
+                <d:Customer>Digital Plus AG</d:Customer>
+                <d:CustomerID>10025</d:CustomerID>
+                <d:DataOriginTypeCode>1</d:DataOriginTypeCode>
+                <d:DataOriginTypeCodeText>Manual data entry</d:DataOriginTypeCodeText>
+                <d:DiagnosticTest>false</d:DiagnosticTest>
+                <d:ID>1422</d:ID>
+                <d:IncidentCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:IncidentCategoryName>
+                <d:IncidentServiceIssueCategoryID/>
+                <d:InitialResponseDate>2012-06-09T00:00:00</d:InitialResponseDate>
+                <d:InitialReviewDueDate>2012-06-11T00:00:00</d:InitialReviewDueDate>
+                <d:InstallationPointID/>
+                <d:InstalledBaseID/>
+                <d:ItemListServiceRequestExecutionLifeCycleStatusCode>1</d:ItemListServiceRequestExecutionLifeCycleStatusCode>
+                <d:ItemListServiceRequestExecutionLifeCycleStatusCodeText>Open</d:ItemListServiceRequestExecutionLifeCycleStatusCodeText>
+                <d:LastChangeDate>2014-05-20T00:00:00</d:LastChangeDate>
+                <d:LastResponseOnDate m:null="true"/>
+                <d:Name>System issue at Digital Plus AG</d:Name>
+                <d:NextResponseDueDate>2012-08-05T00:00:00</d:NextResponseDueDate>
+                <d:ObjectCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode/>
+                    <d:content/>
+                </d:ObjectCategoryName>
+                <d:ObjectID>00163E03A0701ED28DABB39DFBC660FD</d:ObjectID>
+                <d:ObjectServiceIssueCategoryID/>
+                <d:Partner/>
+                <d:PartnerID/>
+                <d:ProcessingTypeCode>SRRQ</d:ProcessingTypeCode>
+                <d:ProcessingTypeCodeText>Service Request</d:ProcessingTypeCodeText>
+                <d:ProductCategoryDescription>B2C - HT - Imaging</d:ProductCategoryDescription>
+                <d:ProductID>P600103</d:ProductID>
+                <d:ReferenceDate m:null="true"/>
+                <d:ReportedForEmail/>
+                <d:ReportedForPartyID/>
+                <d:ReporterEmail>Frank.Sander@ONDEMAND.COM</d:ReporterEmail>
+                <d:ReporterPartyID>1000118</d:ReporterPartyID>
+                <d:RequestAssignmentStatusCode>2</d:RequestAssignmentStatusCode>
+                <d:RequestAssignmentStatusCodeText>Requestor Action</d:RequestAssignmentStatusCodeText>
+                <d:RequestedEnd/>
+                <d:RequestedEndTimeZoneCode/>
+                <d:RequestedStart/>
+                <d:RequestedStartTimeZoneCode/>
+                <d:SalesTerritoryID/>
+                <d:ScheduledEndDate m:null="true"/>
+                <d:ScheduledEndTime>PT00H00M00S</d:ScheduledEndTime>
+                <d:ScheduledStartDate m:null="true"/>
+                <d:ScheduledStartTime>PT00H00M00S</d:ScheduledStartTime>
+                <d:SerialID/>
+                <d:ServiceAndSupportTeam>S3111</d:ServiceAndSupportTeam>
+                <d:ServiceCategoryName m:type="servicerequest.MEDIUM_Name">
+                    <d:languageCode>E</d:languageCode>
+                    <d:content>General Usage Issue</d:content>
+                </d:ServiceCategoryName>
+                <d:ServiceIssueCategoryID>PS-GEN</d:ServiceIssueCategoryID>
+                <d:ServiceLevelAgreement>CLOUDFORSERVICE_SLA_VIP</d:ServiceLevelAgreement>
+                <d:ServicePriorityCode>2</d:ServicePriorityCode>
+                <d:ServicePriorityCodeText>Urgent</d:ServicePriorityCodeText>
+                <d:ServiceRequestClassificationCode/>
+                <d:ServiceRequestClassificationCodeText/>
+                <d:ServiceRequestLifeCycleStatusCode>2</d:ServiceRequestLifeCycleStatusCode>
+                <d:ServiceRequestLifeCycleStatusCodeText>In Process</d:ServiceRequestLifeCycleStatusCodeText>
+                <d:ServiceRequestUserLifeCycleStatusCode>4</d:ServiceRequestUserLifeCycleStatusCode>
+                <d:ServiceRequestUserLifeCycleStatusCodeText>In Process - Waiting for Customer</d:ServiceRequestUserLifeCycleStatusCodeText>
+                <d:ServiceTechnician/>
+                <d:ServiceTechnicianTeam/>
+                <d:Technician/>
+                <d:WarrantyDescription/>
+                <d:WarrantyFrom m:null="true"/>
+                <d:WarrantyTo m:null="true"/>
+            </m:properties>
+        </content>
+    </entry>
+</feed>
+--ejjeeffe0
+Content-Type: multipart/mixed; boundary=ejjeeffe1
+Content-Length:      2329
+
+--ejjeeffe1
+Content-Type: application/http
+Content-Length: 96
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 204 No Content
+Content-Type: text/html
+Content-Length: 0
+dataserviceversion: 2.0
+
+
+--ejjeeffe1
+Content-Type: application/http
+Content-Length: 2008
+Content-Transfer-Encoding: binary
+
+HTTP/1.1 201 Created
+Content-Type: application/atom+xml;type=entry
+Content-Length: 1716
+location: https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/ServiceRequestItemCollection('00163E0DBD9E1ED59AABEB57FF4A3F4B')
+dataserviceversion: 2.0
+cache-control: no-cache, no-store
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<entry xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/" xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+    <id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/servicerequest/ServiceRequestItemCollection('00163E0DBD9E1ED59AABEB57FF4A3F4B')</id>
+    <title type="text">ServiceRequestItemCollection('00163E0DBD9E1ED59AABEB57FF4A3F4B')</title>
+    <updated>2015-10-02T23:43:20Z</updated>
+    <category term="servicerequest.ServiceRequestItem" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+    <link href="ServiceRequestItemCollection('00163E0DBD9E1ED59AABEB57FF4A3F4B')" rel="edit" title="ServiceRequestItem"/>
+    <link href="ServiceRequestItemCollection('00163E0DBD9E1ED59AABEB57FF4A3F4B')/ServiceRequest" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequest" type="application/atom+xml;type=entry" title="ServiceRequest"/>
+    <link href="ServiceRequestItemCollection('00163E0DBD9E1ED59AABEB57FF4A3F4B')/ServiceRequestFirstRequestedItemScheduleLine" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ServiceRequestFirstRequestedItemScheduleLine" type="application/atom+xml;type=entry" title="ServiceRequestFirstRequestedItemScheduleLine"/>
+    <content type="application/xml">
+        <m:properties>
+            <d:Description>1m water hose</d:Description>
+            <d:ObjectID>00163E0DBD9E1ED59AABEB57FF4A3F4B</d:ObjectID>
+            <d:ParentObjectID>00163E0DBD9E1ED596EBDFDA564728AC</d:ParentObjectID>
+            <d:ProductCategoryDescription>Parts</d:ProductCategoryDescription>
+            <d:ProductID>10000760</d:ProductID>
+        </m:properties>
+    </content>
+</entry>
+--ejjeeffe1--
+
+--ejjeeffe0--
+```
+
+
 ####$expand
 
 C4C OData API's support for $expand system query option is via Navigaton Properties. 
@@ -342,10 +746,8 @@ eq | /OpportunityCollection?$filter=AccountID eq '1001910' | Gets all Opportunit
 endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
 
-For usage of $expand with $filter see the $expand section below.
 
-
-
+Please note that currently C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.
 
 
 ####$inlinecount
@@ -388,9 +790,12 @@ JSON response with inlinecount. The attribute __count contains the response to t
         ...
 ```
 
-#####$search
+####$search
+Although $search is not part of OData V2 specification, $search is supported by C4C OData API. Once $search is performed, C4C OData API compares the term provided to $search against the properties marked as $search relevant in OData Service Expolorer. Standard C4C OData services are delievered with $search relevant properties marked. 
 
-From an OData version point of view $search is **NOT** part of OData V2 specification. However C4C OData API does support $search. This is one of the 'enhacements' that has been adopted over the V2 standard. Using the OData Service Explorer it is possible to flag entity attributes as being relevant for search. If flagged, $search can be done at the entity collection level. The following example outlines the usage of the $search:
+For custom OData services, it is possible to mark $search releveant entity properties individually as well as at the entity collection level. 
+
+The following example shows the usage of the $search:
 
 ```
 https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollection?$search='Porter'
