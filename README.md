@@ -818,8 +818,8 @@ https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollect
 
 ###Sample Payloads
 
-  * [Service Ticket](https://github.com/venkyvb/c4c-api/blob/master/sections/serviceticket.md)
-  * [Mass query pattern](https://github.com/venkyvb/c4c-api/blob/master/sections/massquery.md)
+  * [Service Ticket](sections/serviceticket.md)
+  * [Mass query pattern](sections/massquery.md)
 
 
 
