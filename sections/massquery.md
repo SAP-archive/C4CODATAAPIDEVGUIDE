@@ -26,4 +26,5 @@ GET CustomerCollection?$top=5000&$inlinecount=allpages&$format=json&$filter=ID e
 ```
 In the above example 5000 entries are being read with the $filter condition having 5000 OR conditions that are based on the ID attribute.
 
-Note that before the GET in the batch body there should be one carriage return line feed and after the GET there should be at least 2 carriage return line feeds.
+Note that before the GET in the batch body there should be one carriage return line feed and after the GET there should be at least 2 carriage return line feeds. In addition, __please note that the query parameters in the $batch body needs to be URL encoded.__
+
