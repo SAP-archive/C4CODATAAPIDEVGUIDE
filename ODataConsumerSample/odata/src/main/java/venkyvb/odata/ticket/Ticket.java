@@ -7,15 +7,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Ticket {
 
-	private java.lang.String _accountId;
-
-	private java.lang.String _contactId;
-
 	private java.lang.String _ticketId;
 
 	private java.lang.String _ticketUUID;
 
-	private java.lang.String _subject;
+	private java.lang.String _name;
 
 	private Status _status;
 
@@ -33,14 +29,6 @@ public class Ticket {
 
 	private java.util.Date _changedAt;
 
-	public java.lang.String getAccountId() {
-		return _accountId;
-	}
-
-	public java.lang.String getContactId() {
-		return _contactId;
-	}
-
 	public java.lang.String getTicketId() {
 		return _ticketId;
 	}
@@ -49,8 +37,8 @@ public class Ticket {
 		return _ticketUUID;
 	}
 
-	public java.lang.String getSubject() {
-		return _subject;
+	public java.lang.String getName() {
+		return _name;
 	}
 
 	public Status getStatus() {
@@ -85,14 +73,6 @@ public class Ticket {
 		return _changedAt;
 	}
 
-	public void setAccountId(final java.lang.String _accountId) {
-		this._accountId = _accountId;
-	}
-
-	public void setContactId(final java.lang.String _contactId) {
-		this._contactId = _contactId;
-	}
-
 	public void setTicketId(final java.lang.String _ticketId) {
 		this._ticketId = _ticketId;
 	}
@@ -101,8 +81,8 @@ public class Ticket {
 		this._ticketUUID = _ticketUUID;
 	}
 
-	public void setSubject(final java.lang.String _subject) {
-		this._subject = _subject;
+	public void setName(final java.lang.String _name) {
+		this._name = _name;
 	}
 
 	public void setStatus(final Status _status) {
@@ -147,9 +127,8 @@ public class Ticket {
 			}
 		}
 
-		return "Ticket [_accountId=" + _accountId + ", _contactId="
-				+ _contactId + ", _ticketId=" + _ticketId + ", _ticketUUID="
-				+ _ticketUUID + ", _subject=" + _subject + ", _status="
+		return "Ticket [_ticketId=" + _ticketId + ", _ticketUUID="
+				+ _ticketUUID + ", _name=" + _name + ", _status="
 				+ _status + ", _customerNote=" + _customerNote
 				+ ", _issuePriority=" + _issuePriority + ", _issueCategory="
 				+ _issueCategory + ", _notes=" + sb.toString()

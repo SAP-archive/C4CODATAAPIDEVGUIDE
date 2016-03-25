@@ -261,7 +261,7 @@ public class ServiceTicketODataConsumer {
 
 		changeSet.add(changeRequestTicket);
 
-		String uriNotes = new StringBuilder("ServiceRequestNotesCollection")
+		String uriNotes = new StringBuilder("ServiceRequestDescriptionCollection")
 				.toString();
 
 		changeSetHeaders.put("Content-ID", UUID.randomUUID().toString());
@@ -332,41 +332,33 @@ public class ServiceTicketODataConsumer {
 	public String serializeTicketDeepInsert(Ticket t)
 			throws EntityProviderException, IOException, Exception {
 
-		// Input fields Priority, ProductID, IssueCategory, Subject & customer
+		// Input fields Priority, ProductID, IssueCategory, Name & customer
 		// note
 		Map<String, Object> prop = new HashMap<String, Object>();
 
 		if (t.getIssuePriority() != null) {
-			prop.put("Priority", t.getIssuePriority().getPriorityCode());
+			prop.put("ServicePriorityCode", t.getIssuePriority().getPriorityCode());
 		}
 
 		if (!StringUtils.isBlank(t.getProductId())) {
 			prop.put("ProductID", t.getProductId());
 		}
 
-		if (!StringUtils.isBlank(t.getSubject())) {
-			prop.put("Subject", t.getSubject());
+		if (!StringUtils.isBlank(t.getName())) {
+			prop.put("Name", t.getName());
 		}
 
 		if (!StringUtils.isBlank(t.getIssueCategory())) {
 			prop.put("ServiceIssueCategoryID", t.getIssueCategory());
 		}
 		
-		if(!StringUtils.isBlank(t.getAccountId())){
-			prop.put("AccountID", t.getAccountId());
-		}
-		
-		if(!StringUtils.isBlank(t.getContactId())){
-			prop.put("ContactID", t.getContactId());
-		}
-
 		Map<String, Object> propNotes = new HashMap<String, Object>();
 		if (t.getNotes() != null) {
 			propNotes.put("Text", t.getNotes().get(0).getNoteDescription());
 			propNotes.put("TypeCode", t.getNotes().get(0).getNoteType().getTypeCode()); // Incident description
 			ArrayList<Map<String, Object>> arrayMap = new ArrayList<Map<String, Object>>();
 			arrayMap.add(propNotes);
-			prop.put("ServiceRequestNotes", arrayMap);
+			prop.put("ServiceRequestDescription", arrayMap);
 		}
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -377,20 +369,20 @@ public class ServiceTicketODataConsumer {
 	public String serializeTicket(Ticket t) throws EntityProviderException,
 			IOException, Exception {
 
-		// Input fields Priority, ProductID, IssueCategory, Subject & customer
+		// Input fields Priority, ProductID, IssueCategory, Name & customer
 		// note
 		Map<String, Object> prop = new HashMap<String, Object>();
 
 		if (t.getIssuePriority() != null) {
-			prop.put("Priority", t.getIssuePriority().getPriorityCode());
+			prop.put("ServicePriorityCode", t.getIssuePriority().getPriorityCode());
 		}
 
 		if (!StringUtils.isBlank(t.getProductId())) {
 			prop.put("ProductID", t.getProductId());
 		}
 
-		if (!StringUtils.isBlank(t.getSubject())) {
-			prop.put("Subject", t.getSubject());
+		if (!StringUtils.isBlank(t.getName())) {
+			prop.put("Name", t.getName());
 		}
 
 		if (!StringUtils.isBlank(t.getIssueCategory())) {
@@ -448,7 +440,7 @@ public class ServiceTicketODataConsumer {
 
 		SystemQueryOptions queryOptions = this.new SystemQueryOptions();
 		String queryString = new StringBuffer(
-				"?$format=json&$expand=ServiceRequestNotes&$filter=ObjectID%20eq%20%27")
+				"?$format=json&$expand=ServiceRequestDescription&$filter=ObjectID%20eq%20%27")
 				.append(ticketId).append("%27").toString();
 		queryOptions.setQueryCondition(queryString);
 
@@ -505,8 +497,8 @@ public class ServiceTicketODataConsumer {
 						result.setIssueCategory(value.toString().toUpperCase());
 					}
 
-					if (propName.equals("Subject")) {
-						result.setSubject(value.toString());
+					if (propName.equals("Name")) {
+						result.setName(value.toString());
 					}
 
 					if (propName.equals("ProductID")) {
@@ -523,18 +515,11 @@ public class ServiceTicketODataConsumer {
 								"^0+(?!$)", ""));
 					}
 
-					if (propName.equals("Priority")) {
+					if (propName.equals("ServicePriorityCode")) {
 						result.setIssuePriority(IssuePriority.fromPriorityCode(
 								value.toString()).get());
 					}
 
-					if (propName.equals("AccountID")) {
-						result.setAccountId(value.toString());
-					}
-
-					if (propName.equals("ContactID")) {
-						result.setContactId(value.toString());
-					}
 				}
 			}
 
@@ -611,14 +596,14 @@ public class ServiceTicketODataConsumer {
 	}
 
 	private String getODataServiceUrl() {
-		return "https://HOST_NAME/sap/byd/odata/v1/SERVICE_NAME";
+		return "https://<YourTenantName>.crm.ondemand.com/sap/byd/odata/v1/servicerequest";
 	}
 
 	private String getAuthorizationHeader() {
 		// Note: This example uses Basic Authentication
 		// Preferred option is to use OAuth SAML bearer flow.
-		String temp = new StringBuilder("USER_NAME").append(":")
-				.append("PASSWORD").toString();
+		String temp = new StringBuilder("administration01").append(":")
+				.append("<YourPassCode!!>").toString();
 		String result = "Basic "
 				+ new String(Base64.encodeBase64(temp.getBytes()));
 		logger.info("AuthorizationHeader " + result);

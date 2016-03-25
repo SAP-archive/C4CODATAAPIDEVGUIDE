@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import main.java.venkyvb.odata.ticket.IssuePriority;
 import main.java.venkyvb.odata.ticket.Note;
 import main.java.venkyvb.odata.ticket.NoteType;
 import main.java.venkyvb.odata.ticket.Ticket;
@@ -28,9 +29,8 @@ public class App
         Ticket newTicket = new Ticket();
         newTicket.setIssueCategory("CA_199");
         newTicket.setProductId("P400101");
-        newTicket.setSubject("Testing ticket creation via OData");
-        newTicket.setAccountId("000000000000000000000000000000000000000000000000000001001222");
-        newTicket.setContactId("000000000000000000000000000000000000000000000000000001001223");
+        newTicket.setName("Testing ticket creation via OData");
+        newTicket.setIssuePriority(IssuePriority.HIGH);
         
         // Add an incident description
         Note incDesc = new Note();
