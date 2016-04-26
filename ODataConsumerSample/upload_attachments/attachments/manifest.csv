@@ -1,4 +1,4 @@
 ParentObjectID,TypeCode,AttachmentName,MimeType,Path
-00163E038C2E1EE299C1BB0BE9398F9B,10001,contract green,application/txt,smallAttachment.txt
+00163E038C2E1EE299C1BB0BE9398F9B,10001,sample text attachment,application/txt,smallAttachment.txt
 00163E038C2E1EE299C1BB0BE93C2F9B,10001,Directions to SAP,application/pdf,SAP_wdf.pdf
-00163E038C2E1EE299C1BB281BF42F9B,10001,Uitslag wateronderzoek,application/pdf,SAP_wdf.pdf
+00163E038C2E1EE299C1BB281BF42F9B,10001,Directions to SAP,application/pdf,SAP_wdf.pdf
