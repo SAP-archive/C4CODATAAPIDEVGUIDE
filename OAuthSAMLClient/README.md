@@ -39,22 +39,41 @@ Here is the steps to create a self-signing certificate for registering your OAut
  
 
 1) Generate a key
+
+```
 openssl genrsa -aes256 -out server.key 2048
+```
 
 2) Generate cert request for CA
+
+```
 openssl req -x509 -sha256 -new -key server.key -out server.csr
+```
 
 3) Self sign the certificate
+
+```
 openssl x509 -sha256 -days 3652 -in server.csr -signkey server.key -out selfsigned.cer
+```
 
 4) Create pkcs12 key store
+
+```
 openssl pkcs12 -export -name myservercert -in selfsigned.cer -inkey server.key -out keystore.p12
+```
 
 5) Convert pkcs12 into JKS keystore
+
+```
 keytool -importkeystore -destkeystore mykeystore.jks -srckeystore keystore.p12 -srcstoretype pkcs12 -alias myservercert
+```
 
 6) Verify
+
+```
 keytool -list -v -keystore mykeystore.jks
+```
+
 
 
 
