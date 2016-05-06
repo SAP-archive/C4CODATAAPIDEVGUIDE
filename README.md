@@ -79,6 +79,20 @@ Example:
 https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata
 ```
 
+Labals for the entities and their properties can be retrieved by appending the query parameter <i>sap-label=true</i>.
+
+```
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label-true
+```
+
+To receive the UI labels in a particular language HTTP header Accept-Language can be used. Prefered language code can be set based on [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).
+
+For example, to receive the UI labels in Turkish the following should be passed to the HTTP request header.
+
+```
+Accept-Language:tr 
+```
+
 ####Supported HTTP operations
 
 C4C OData API supports the following OData/HTTP operations:
@@ -820,6 +834,82 @@ https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollect
 
   * [Service Ticket](sections/serviceticket.md)
   * [Mass query pattern](sections/massquery.md)
+
+
+###ETag Support
+[HTTP ETag](https://en.wikipedia.org/wiki/HTTP_ETag) (entity tag) is mainly used for [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) and client side caching of data. Since C4C 1602, OData API provides support for weak validation of ETags.
+
+```
+W/"datetimeoffset'2016-04-27T23%3A07%3A31.6809330Z'"
+```
+
+Each C4C entity has an associated ETag (which indicates the last updated datetime of that entity). Thus, when a collection of C4C entities are read, associated ETag of each entity is returned in its ETag ETag property. 
+
+
+```
+{
+  "d": {
+    "results": [
+      {
+        "__metadata": {
+          "uri": "https://my315537.crm.ondemand.com/sap/c4c/odata/v1/c4codata/
+          ProductCollection('00163E03A0701EE288BE9895233EBD27')",
+          "type": "c4codata.Product",
+          "etag": "W/\"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'\""
+        },
+        "ObjectID": "00163E03A0701EE288BE9895233EBD27",
+        "ID": "P140100",
+        "UUID": "00163E03-A070-1EE2-88BE-9895233EBD27",
+        "CreatedOn": "/Date(1351534600660)/",
+        "CreatedBy": "SAP WORKER",
+        "ChangedOn": "/Date(1422997623532)/",
+        "StatusCode": "3",
+        "UnitOfMeasureCode": "EA",
+        "Description": "GS Marengo Womens Mountain Bike",
+        "languageCode": "E",
+        "ETag": "/Date(1422997623532)/",	<============== ETag in the entity record
+        "StatusCodeText": "Blocked",
+        "UnitOfMeasureCodeText": "Each",
+        "languageCodeText": "English",
+ ...
+```
+
+In the case where a single C4C Entity is read, in addition to the ETag property, the ETag is also returned as part of the response header.
+
+```
+c4c-odata-response-time →2061 ms
+cache-control →no-cache, no-store
+content-encoding →gzip
+content-length →505
+content-type →application/json; charset=utf-8
+dataserviceversion →2.0
+etag →W/"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'"   <<========== ETag in response header
+x-csrf-token →dQOr2DmqinUDkzVKub0L4A==
+```
+
+####Optimistic Concurrency Control with ETag
+When ETag is used for optimistic concurrency control following scenario is implemented:
+
+* Client application receives the ETag associated with the entity read
+* While modifiying the record in the server via HTTP PUT, PATCH or DELETE, the client sets the HTTP request header <i>If-Match</i> with the ETag previously read.
+* If ETag associated with the entity in the server matches the ETag passed in the request header, the call succeeds with <i>HTTP response 204</i>. (I.e. no other updates has been made since the client read the entity record)
+* Otherwise, the HTTP response gets the status <i>412 Precondition Failed</i> (i.e. The conurrency check fails)
+
+Example HTTP PUT request with concurrency control:
+
+```
+	PUT AccountCollection HTTP/1.1
+	host: <your tenant>
+	content-type: application/json
+	if-match: W/"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'"
+	x-csrf-token: dQOr2DmqinUDkzVKub0L4A==
+
+	{
+		"AccountName":"New Name of the account"
+	}
+
+```
+
 
 
 
