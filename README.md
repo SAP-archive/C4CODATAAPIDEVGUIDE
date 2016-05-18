@@ -16,7 +16,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 - [OData Service Document](#odata-service-document)
 - [OData Service Metadata](#odata-service-metadata)
 	- [Supported HTTP operations](#supported-http-operations)
-- [Making HTTP Requests](#making-http-requests)
+- [Consuming C4C OData API](#consuming-c4c-odata-api)
 	- [Supported Formats](#supported-formats)
 	- [Authentication](#authentication-1)
 	- [CSRF Token](#csrf-token)
@@ -148,8 +148,8 @@ $batch | Used to perform multiple query, create, update and delete operations wi
 Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
 
 
-<a name="making-http-requests"></a>
-## Making HTTP Requests
+<a name="consuming-c4c-odata-api"></a>
+## Consuming C4C OData API
 <a name="supported-formats"></a>
 ### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
