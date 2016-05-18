@@ -15,6 +15,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 - [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
 - [OData Service Document](#odata-service-document)
 - [OData Service Metadata](#odata-service-metadata)
+	- [Supported HTTP operations](#supported-http-operations)
 - [Making HTTP Requests](#making-http-requests)
 	- [Supported Formats](#supported-formats)
 	- [Authentication](#authentication-1)
@@ -22,8 +23,14 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 	- [Server side paging](#server-side-paging)
 	- [Sample Java Client](#sample-java-client)
 	- [Supported System Query Options](#supported-system-query-options)
+		- [$batch](#batch)
+		- [$expand](#expand)
+		- [$filter](#filter)
+		- [$inlinecount](#inlinecount)
+		- [$search](#search)
 	- [Sample Payloads](#sample-payloads)
 	- [ETag Support](#etag-support)
+		- [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
 
 <!-- /MarkdownTOC -->
 
@@ -125,7 +132,8 @@ For example, to receive the UI labels in Turkish the following should be passed 
 Accept-Language:tr 
 ```
 
-####Supported HTTP operations
+<a name="supported-http-operations"></a>
+#### Supported HTTP operations
 
 C4C OData API supports the following OData/HTTP operations:
 
@@ -245,6 +253,7 @@ Query Option | Example | Description
 
 Below you will find additional details for some of the system query options.
 
+<a name="batch"></a>
 #### $batch
 Used to query, create/update multiple entities with explicit transaction boundaries specified via Changesets as a part of the payload
 
@@ -713,6 +722,7 @@ cache-control: no-cache, no-store
 ```
 
 
+<a name="expand"></a>
 #### $expand
 
 C4C OData API's support for $expand system query option is via Navigaton Properties. 
@@ -806,6 +816,7 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 ```
 
 
+<a name="filter"></a>
 #### $filter
 
 Option | Example | Description
@@ -818,6 +829,7 @@ startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All a
 Please note that currently C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.
 
 
+<a name="inlinecount"></a>
 #### $inlinecount
 
 XML response with inlinecount. The Element <m:count> contains the response to the $inlinecount.
@@ -858,6 +870,7 @@ JSON response with inlinecount. The attribute __count contains the response to t
         ...
 ```
 
+<a name="search"></a>
 #### $search
 Although $search is not part of OData V2 specification, $search is supported by C4C OData API. Once $search is performed, C4C OData API compares the term provided to $search against the properties marked as $search relevant in OData Service Expolorer. Standard C4C OData services are delievered with $search relevant properties marked. 
 
@@ -928,6 +941,7 @@ etag →W/"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'"   <<========== ETag
 x-csrf-token →dQOr2DmqinUDkzVKub0L4A==
 ```
 
+<a name="optimistic-concurrency-control-with-etag"></a>
 #### Optimistic Concurrency Control with ETag
 When ETag is used for optimistic concurrency control following scenario is implemented:
 
