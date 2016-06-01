@@ -231,6 +231,13 @@ Here is an excerpt with the **next** link:
 
 (in this specific case the LeadCollection entity set is being queried).
 
+
+Server side paging can also be implemented for a set number of records. In this case, $top and $skip system query options can be used together retrieve a page of records. The following example returns 100 records starting from record number 301.
+
+```
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/AccountCollection?$skip=300&$top=100
+```
+
 <a name="sample-java-client"></a>
 ### Sample Java Client
 A sample Java client demonstrating how to make OData calls to C4C is available [here](ODataConsumerSample). The sample uses Apache Olingo library to construct and read OData payloads.
