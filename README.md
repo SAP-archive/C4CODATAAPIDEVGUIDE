@@ -829,6 +829,8 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 Option | Example | Description
 -------|---------|------------
 eq | /OpportunityCollection?$filter=AccountID eq '1001910' | Gets all Opportunity entries that matches the specified AccountID
+ge, le |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
+datetimeoffset| /AccountCollection?$filter=CreatedOn ge datetimeoffset'2015-04-01T00:00:00Z' | Accounts created on or after given datetime
 endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
 
