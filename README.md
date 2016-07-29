@@ -8,14 +8,15 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 <!-- MarkdownTOC -->
 
 - [What is OData protocol?](#what-is-odata-protocol)
-- [OData versions](#odata-versions)
+	- [OData versions](#odata-versions)
 - [SAP Cloud for Customer \(C4C\) OData Services](#sap-cloud-for-customer-c4c-odata-services)
-- [OData Service Catalog](#odata-service-catalog)
-- [Authentication](#authentication)
-- [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
-- [OData Service Document](#odata-service-document)
-- [OData Service Metadata](#odata-service-metadata)
+	- [OData Service Catalog](#odata-service-catalog)
+	- [Authentication](#authentication)
+	- [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
+	- [OData Service Document](#odata-service-document)
+	- [OData Service Metadata](#odata-service-metadata)
 	- [Supported HTTP operations](#supported-http-operations)
+	- [Known Limitations](#known-limitations)
 - [Consuming C4C OData API](#consuming-c4c-odata-api)
 	- [Supported Formats](#supported-formats)
 	- [Authentication](#authentication-1)
@@ -28,9 +29,9 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 		- [$filter](#filter)
 		- [$inlinecount](#inlinecount)
 		- [$search](#search)
-	- [Sample Payloads](#sample-payloads)
 	- [ETag Support](#etag-support)
 		- [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
+- [Sample Payloads](#sample-payloads)
 
 <!-- /MarkdownTOC -->
 
@@ -41,7 +42,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials. 
 
 <a name="odata-versions"></a>
-## OData versions
+### OData versions
 SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [here](http://www.odata.org/documentation/odata-version-2-0/).
 
 <a name="sap-cloud-for-customer-c4c-odata-services"></a>
@@ -61,7 +62,7 @@ https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/
 ```
 
 <a name="odata-service-catalog"></a>
-## OData Service Catalog
+### OData Service Catalog
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
 ```
@@ -71,7 +72,7 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServ
 The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](http://help.sap.com/saphelp_sapcloudforcustomer/en/ODATA_APIs/index.html#8e4220fa6dc943ef891fb3d0e91515d3.html).
 
 <a name="authentication"></a>
-## Authentication
+### Authentication
 SAP Cloud for Customer OData API supports two different authentication mechanisms:
 
 * Basic Authentication (username and password pair)
@@ -80,7 +81,7 @@ SAP Cloud for Customer OData API supports two different authentication mechanism
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
 <a name="sap-standard-vs-custom-odata-services"></a>
-## SAP Standard vs. Custom OData Services
+### SAP Standard vs. Custom OData Services
 
 SAP Cloud for Customer provides a standard OData API. In addition, SAP Cloud for Customer also allows customers to build their own (custom) OData services based on the predefined business objects in the solution.
 
@@ -95,7 +96,7 @@ The following URL pattern differetiates the Standard and Custom OData services.
 * Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
 
 <a name="odata-service-document"></a>
-## OData Service Document
+### OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
 
 ```
@@ -105,7 +106,7 @@ https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/
 where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
 
 <a name="odata-service-metadata"></a>
-## OData Service Metadata
+### OData Service Metadata
 OData service metadata is retrieved via the following URL.
 
 ```
@@ -126,14 +127,14 @@ https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label-true
 
 To receive the UI labels in a particular language HTTP header Accept-Language can be used. Prefered language code can be set based on [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).
 
-For example, to receive the UI labels in Turkish the following should be passed to the HTTP request header.
+For example, to receive the UI labels in Turkish the HTTP request header should be set as below:
 
 ```
 Accept-Language:tr 
 ```
 
 <a name="supported-http-operations"></a>
-#### Supported HTTP operations
+### Supported HTTP operations
 
 C4C OData API supports the following OData/HTTP operations:
 
@@ -147,6 +148,15 @@ DELETE | Used to delete an entity record
 $batch | Used to perform multiple query, create, update and delete operations with explicit transaction boundaries specified via Changesets as a part of the payload
 Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
 
+
+<a name="known-limitations"></a>
+### Known Limitations
+
+|Limitation|Workaround|
+|----------|----------|
+| C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.| See [$filter](#filter) for supported options|
+|Logical OR only works for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
+|C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions.|  See [$expand](#expand) for a possible workaround when the sub-entity contains a reference to the main entity with the property *ParentObjectID*.|
 
 <a name="consuming-c4c-odata-api"></a>
 ## Consuming C4C OData API
@@ -822,20 +832,19 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 /OpportunityItemCollection?$format=json&$filter=ProductID eq 'P300104'&$expand=Opportunity
 ```
 
+**Performance considerations:** Due to their complex nature, $expand queries require additional processing in comparison to the queries involving a single entity. Thus, in some cases $expand queries can be significantly slow. While this should not impact the performance requirements of a result set with few records, when a high number of records are expected, performance might not be ideal. Therefore, we recommend that applications should be designed accordingly and implement alternative methods, if $expand query doesn't meet the performance requirements.
+
 
 <a name="filter"></a>
 #### $filter
 
 Option | Example | Description
 -------|---------|------------
-eq | /OpportunityCollection?$filter=AccountID eq '1001910' | Gets all Opportunity entries that matches the specified AccountID
+eq | /OpportunityCollection?$filter=AccountID eq '1001910' <br><br> /UserCollection?$filter=UserID eq '\*ADMIN\*'| Gets all Opportunity entries that matches the specified AccountID <br><br> Matches UserID containing the string ADMIN - '*' can be used as a wildcard.
 ge, le |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
 datetimeoffset| /AccountCollection?$filter=CreatedOn ge datetimeoffset'2015-04-01T00:00:00Z' | Accounts created on or after given datetime
 endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
-
-
-Please note that currently C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.
 
 
 <a name="inlinecount"></a>
@@ -881,22 +890,15 @@ JSON response with inlinecount. The attribute __count contains the response to t
 
 <a name="search"></a>
 #### $search
-Although $search is not part of OData V2 specification, $search is supported by C4C OData API. Once $search is performed, C4C OData API compares the term provided to $search against the properties marked as $search relevant in OData Service Expolorer. Standard C4C OData services are delievered with $search relevant properties marked. 
+Although it is not part of OData V2 specification, $search is supported by C4C OData API. Once $search is performed, C4C OData API compares the term provided to $search against the properties marked as $search relevant in OData Service Expolorer. Standard C4C OData services are delievered with $search relevant properties marked. 
 
 For custom OData services, it is possible to mark $search releveant entity properties individually as well as at the entity collection level. 
 
-The following example shows the usage of the $search:
+Please note that the term passed to $search should not be bound by any quotes or double-quotes even when the term contains spaces. The following example shows the usage of the $search.:
 
 ```
-https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollection?$search='Porter'
+https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollection?$search=test user
 ```
-
-<a name="sample-payloads"></a>
-### Sample Payloads
-
-  * [Service Ticket](sections/serviceticket.md)
-  * [Mass query pattern](sections/massquery.md)
-
 
 <a name="etag-support"></a>
 ### ETag Support
@@ -975,8 +977,16 @@ Example HTTP PUT request with concurrency control:
 ```
 
 
+<a name="sample-payloads"></a>
+## Sample Payloads
+
+  * [Service Ticket](sections/serviceticket.md)
+  * [Mass query pattern](sections/massquery.md)
 
 
+
+<hr>
+<center>End of File</center>
 
 
 
