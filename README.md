@@ -832,7 +832,7 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 /OpportunityItemCollection?$format=json&$filter=ProductID eq 'P300104'&$expand=Opportunity
 ```
 
-**Performance considerations:** Due to their complex nature, $expand queries require additional processing in comparison to the queries involving a single entity. Thus, in some cases $expand queries can be significantly slow. While this should not impact the performance requirements of a result set with few records, when a high number of records are expected, performance might not be ideal. Therefore, we recommend that applications should be designed accordingly and implement alternative methods, if $expand query doesn't meet the performance requirements.
+**Performance considerations:** Due to their complex nature, $expand queries require additional processing in comparison to the queries involving a single entity. Thus, in general $expand queries can be slow and in some cases considerably slow. While this should not impact the performance requirements of a result set with few records (e.g. single READ operation), when the result set contains a number of records, performance might not be ideal. Therefore, we recommend that applications should be designed accordingly and if $expand query doesn't meet the performance requirements, implement alternative methods.
 
 
 <a name="filter"></a>
