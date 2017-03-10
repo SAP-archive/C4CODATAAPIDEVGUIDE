@@ -4,7 +4,7 @@ Sample OData Consumer Projects
 <h2>Projects</h2>
 
 <a href="#odata">odata</a><br>
-<a href="#upload_attachments">upload_attachments</a>
+<a href="#upload_attachments">upload_attachments</a><br>
 <a href="#CSharpSample">C# Sample</a>
 
 
