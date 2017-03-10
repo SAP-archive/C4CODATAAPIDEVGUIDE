@@ -5,6 +5,8 @@ Sample OData Consumer Projects
 
 <a href="#odata">odata</a><br>
 <a href="#upload_attachments">upload_attachments</a>
+<a href="#CSharpSample">C# Sample</a>
+
 
 <h2 id="odata">odata</h2>
 
@@ -56,4 +58,6 @@ Under VM Parameters: -Djava.util.logging.SimpleFormatter.format='%1$tY-%1$tm-%1$
 |Path|relative path for the folder where the manifest.csv and the attachment files are located|
 
 
+<h2 id="CSharpSample">C# Sample</h2>
 
+This sample app demonstrates reading and creating new records in C4C OData API in C#. The works around some of the issues around handling cookies and passing credentials that have been reported by partners.
