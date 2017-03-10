@@ -1,0 +1,108 @@
+using System;
+using System.Text;
+using System.Net;
+using System.IO;
+
+namespace SampleODataClient
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // You can test this app using the following tenant which doesn't 
+            // require user credentials.
+            // To test on your tenant, replace the URL with your own tenant URL
+            // and provide user credential
+            string URL = "https://odatac4ctrial.hana.ondemand.com/proxy";
+
+            var username = "username";
+            var password = "password";
+
+            var authHeader = "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
+
+            var cookieContainer = new CookieContainer();
+
+            // Get request for reading the list of collections
+            HttpWebRequest request = (HttpWebRequest)(WebRequest.Create(URL + "/sap/c4c/odata/v1/c4codata/"));
+            // Share cookies between the requests
+            request.CookieContainer = cookieContainer;
+            // Set auth header
+            request.Headers.Add("Authorization", authHeader);
+            // Set header to fetch a CSRF token to be used in modifying requests
+            request.Headers.Add("x-csrf-token", "fetch");
+            // Set accept header to get the data in JSON. Default response format is XML
+            request.Accept = "application/json";
+            // Get the response.  
+            HttpWebResponse response = (HttpWebResponse)(request.GetResponse());
+            // Get the stream containing content returned by the server.  
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.  
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.  
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.  
+            Console.WriteLine("JSON Response to HTTP GET to read service collections");
+            Console.WriteLine("=====================================================");
+            Console.WriteLine("Status:"+response.StatusDescription+"\n");
+            Console.WriteLine(response.Headers.ToString());
+            Console.WriteLine(responseFromServer+"\n");
+
+            // Get x-csrf-token
+            string x_csrf_token = response.Headers["x-csrf-token"];
+            // Clean up the streams and the response.  
+            response.Close();
+
+            // Create a request using a URL that can receive a post.   
+            request = (HttpWebRequest)(WebRequest.Create(URL + "/sap/c4c/odata/v1/c4codata/AccountCollection"));
+            // Set headers
+
+            // Set the Method property of the request to POST.  
+            request.Method = "POST";
+
+            // Create POST data and convert it to a byte array.  
+            // Create a new account
+            string postData = "{\"AccountName\":\"Sample Customer\",\"RoleCode\":\"CRM000\",\"RoleCodeText\": \"Customer\"}";
+
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+
+
+            // Set headers
+            request.CookieContainer = cookieContainer;
+            request.Headers.Add("Authorization", authHeader);
+            request.Headers.Add("X-CSRF-Token", x_csrf_token);
+            request.Accept = "application/json";
+            // Set the ContentType to JSON. Default content-type is XML 
+            request.ContentType = "application/json";
+            request.ContentLength = byteArray.Length;
+
+
+            // Get the request stream.  
+            dataStream = request.GetRequestStream();
+            // Write the data to the request stream.  
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            // Close the Stream object.  
+            dataStream.Close();
+            // Get the response.  
+            response = (HttpWebResponse)(request.GetResponse());
+            // Get the stream containing content returned by the server.  
+            dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.  
+            reader = new StreamReader(dataStream);
+            // Read the content.  
+            responseFromServer = reader.ReadToEnd();
+            // Display the content.  
+            Console.WriteLine("JSON Response to HTTP POST to create a new Account");
+            Console.WriteLine("==================================================");
+            Console.WriteLine("Status:" + response.StatusDescription + "\n");
+            Console.WriteLine(response.Headers.ToString());
+            Console.WriteLine(responseFromServer + "\n");
+            Console.WriteLine("\nPress any enter to continue...");
+            // Clean up the streams.  
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+
+            Console.ReadKey();
+        }
+    }
+}
