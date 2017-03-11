@@ -14,14 +14,11 @@ namespace SampleODataClient
             // To test on your tenant, replace the URL with your own tenant URL
             // and provide user credential
             string URL = "https://odatac4ctrial.hana.ondemand.com/proxy";
-
             var username = "username";
             var password = "password";
 
             var authHeader = "Basic " + Convert.ToBase64String(Encoding.Default.GetBytes(username + ":" + password));
-
             var cookieContainer = new CookieContainer();
-
             // Get request for reading the list of collections
             HttpWebRequest request = (HttpWebRequest)(WebRequest.Create(URL + "/sap/c4c/odata/v1/c4codata/"));
             // Share cookies between the requests
@@ -46,7 +43,6 @@ namespace SampleODataClient
             Console.WriteLine("Status:"+response.StatusDescription+"\n");
             Console.WriteLine(response.Headers.ToString());
             Console.WriteLine(responseFromServer+"\n");
-
             // Get x-csrf-token
             string x_csrf_token = response.Headers["x-csrf-token"];
             // Clean up the streams and the response.  
@@ -54,18 +50,12 @@ namespace SampleODataClient
 
             // Create a request using a URL that can receive a post.   
             request = (HttpWebRequest)(WebRequest.Create(URL + "/sap/c4c/odata/v1/c4codata/AccountCollection"));
-            // Set headers
-
             // Set the Method property of the request to POST.  
             request.Method = "POST";
-
             // Create POST data and convert it to a byte array.  
             // Create a new account
             string postData = "{\"AccountName\":\"Sample Customer\",\"RoleCode\":\"CRM000\",\"RoleCodeText\": \"Customer\"}";
-
             byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
-
             // Set headers
             request.CookieContainer = cookieContainer;
             request.Headers.Add("Authorization", authHeader);
@@ -74,7 +64,6 @@ namespace SampleODataClient
             // Set the ContentType to JSON. Default content-type is XML 
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
-
 
             // Get the request stream.  
             dataStream = request.GetRequestStream();
@@ -101,7 +90,6 @@ namespace SampleODataClient
             reader.Close();
             dataStream.Close();
             response.Close();
-
             Console.ReadKey();
         }
     }
