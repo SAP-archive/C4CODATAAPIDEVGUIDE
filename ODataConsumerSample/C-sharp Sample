@@ -64,7 +64,6 @@ namespace SampleODataClient
             // Set the ContentType to JSON. Default content-type is XML 
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
-
             // Get the request stream.  
             dataStream = request.GetRequestStream();
             // Write the data to the request stream.  
