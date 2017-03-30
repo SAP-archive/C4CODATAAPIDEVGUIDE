@@ -1,8 +1,8 @@
 This page contains the sample payloads for Creating a ticket and Updating the same ticket.
 
-###Create Ticket
+### Create Ticket
 
-####$batch with Deep Insert
+#### $batch with Deep Insert
 
 The following payload creates a Service ticket with:
   * Ticket header
@@ -20,7 +20,7 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/servicerequest/$batch
 
 <strong>Please note that binary values must be provided as Base64 encoded!</strong>
 
-#####Request payload
+##### Request payload
 ```
 --batch_9116e4ce-8c77-4c55-a667-20c4076238cf
 Content-Type: multipart/mixed; boundary=changeset_48b47880-84d2-4f8c-aaa9-c5bcd88ec05c
@@ -79,7 +79,7 @@ Content-Type: application/json
 --batch_9116e4ce-8c77-4c55-a667-20c4076238cf--
 ```
 
-#####Response from C4C
+##### Response from C4C
 
 ```
 --ejjeeffe0
@@ -244,7 +244,7 @@ cache-control: no-cache, no-store
 
 ```
 
-###Update (the created) ticket
+### Update (the created) ticket
 
 The ticket, created in the previous step is now updated as follows:
   * Ticket subject is updated (using the PATCH operation)
@@ -257,7 +257,7 @@ $batch payload is posted to the following end-point (same as the create scenario
 ```
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/servicerequest/$batch
 ```
-#####Request Payload
+##### Request Payload
 ```
 --batch_1189544d-c22a-4728-aae5-5db5942ab290
 Content-Type: multipart/mixed; boundary=changeset_921baf6c-f909-4790-8157-a2919ab7c60e
@@ -348,7 +348,7 @@ Content-Type: application/json
 --batch_1189544d-c22a-4728-aae5-5db5942ab290--
 ```
 
-#####Response payload
+##### Response payload
 
 ```
 --ejjeeffe0
