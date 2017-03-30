@@ -20,38 +20,11 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/$batch
 
 <strong>Please note that binary values must be provided as Base64 encoded!</strong>
 
-##### Request payload
+##### Complete Request (Headers + Payload)
 ```
---batch_9116e4ce-8c77-4c55-a667-20c4076238cf
-Content-Type: multipart/mixed; boundary=changeset_48b47880-84d2-4f8c-aaa9-c5bcd88ec05c
-
---changeset_48b47880-84d2-4f8c-aaa9-c5bcd88ec05c
-Content-Type: application/http
-Content-Transfer-Encoding: binary
-Content-Id: 00068cbe-6a06-476f-91e6-fe46ecd3b22e
-
-POST ServiceRequestCollection HTTP/1.1
-Content-Length: 1012
-Accept: application/json
-Content-ID: 00068cbe-6a06-476f-91e6-fe46ecd3b22e
-Content-Type: application/json
-
-{
-  "ActivityServiceIssueCategoryID": "OS-CAN-OL-IC", 
-  "CauseServiceIssueCategoryID": "OS-CAN-OL", 
-  "DataOriginTypeCode": "4", 
-  "IncidentServiceIssueCategoryID": "OS-CAN", 
-  "Name": "Ticket creation via Generic OData consumer", 
-  "ProcessingTypeCode": "SRRQ", 
-  "ProductID": "LENGLO-01", 
-  "ReportedForPartyID": "E3300", 
-  "ReporterPartyID": "E3300", 
-  "ServiceIssueCategoryID": "OS", 
-  "ServiceRequestAttachmentFolder": [
-    {
 POST /proxy/sap/c4c/odata/v1/c4codata/$batch HTTP/1.1
 Host: odatac4ctrial.hana.ondemand.com
-Authorization: Basic Base64Encode(user:pass)
+Authorization: <No password is required in this tenant>
 x-csrf-token: 4ZiBiNTTNPkv1qQ2Vs21bA==
 Content-Type: multipart/mixed; boundary=batch_1
 
@@ -103,7 +76,7 @@ Content-Type: application/json
 
 ```
 
-##### Response from C4C
+##### Response payload
 
 ```
 --ejjeeffe0
@@ -143,11 +116,11 @@ $batch payload is posted to the following end-point (same as the create scenario
 ```
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/$batch
 ```
-##### Request Payload
+##### Complete Request (Headers + Payload)
 ```
 POST /proxy/sap/c4c/odata/v1/c4codata/$batch HTTP/1.1
 Host: odatac4ctrial.hana.ondemand.com
-Authorization: Basic Base64Encode(user:pass)
+Authorization: Authorization: <No password is required in this tenant>
 x-csrf-token: HYsLa5TUnzOudFM1CgJEZA==
 Content-Type: multipart/mixed; boundary=batch_1
 
@@ -225,7 +198,7 @@ Content-Type: application/json
 --batch_1--
 ```
 
-##### Response payload
+##### Response payload 
 
 ```
 --ejjeeffe0
