@@ -18,6 +18,8 @@ $batch payload is posted to the following end-point:
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/servicerequest/$batch
 ```
 
+<strong>Please note that binary values must be provided as Base64 encoded!</strong>
+
 #####Request payload
 ```
 --batch_9116e4ce-8c77-4c55-a667-20c4076238cf
