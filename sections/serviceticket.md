@@ -15,7 +15,7 @@ In addition, for demonstration purposes the Deep Insert is being done via a $bat
 
 $batch payload is posted to the following end-point:
 ```
-https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/servicerequest/$batch
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/$batch
 ```
 
 <strong>Please note that binary values must be provided as Base64 encoded!</strong>
