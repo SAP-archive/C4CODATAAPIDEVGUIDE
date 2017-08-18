@@ -122,7 +122,7 @@ https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadat
 Labals for the entities and their properties can be retrieved by appending the query parameter <i>sap-label=true</i>.
 
 ```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label-true
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label=true
 ```
 
 To receive the UI labels in a particular language HTTP header Accept-Language can be used. Prefered language code can be set based on [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).
