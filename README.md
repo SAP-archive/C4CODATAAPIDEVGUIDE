@@ -1,7 +1,7 @@
 # SAP Cloud for Customer OData API Developer's Guide
-The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](http://help.sap.com/saphelp_sapcloudforcustomer/en/ODATA_APIs/index.html#e4d5b5e4f6d847f7ad2025f5f343e03f.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
+The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/e4d5b5e4f6d847f7ad2025f5f343e03f.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
-For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Getting Started Guide](http://help.sap.com/saphelp_sapcloudforcustomer/en/ODATA_APIs/index.html#17bf468d1b69474794a1ea4cac125be4.html).
+For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Document](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html).
 
 ## Table of Contents
 
@@ -85,7 +85,7 @@ Please note that the C4C system used in the example URLs throughout this documen
 
 SAP Cloud for Customer provides a standard OData API. In addition, SAP Cloud for Customer also allows customers to build their own (custom) OData services based on the predefined business objects in the solution.
 
-[OData Service Explorer](http://help.sap.com/saphelp_sapcloudforcustomer/en/ODATA_APIs/index.html#8e4220fa6dc943ef891fb3d0e91515d3.html) is a key user tool that allows exploring and testing SAP provided OData API as well as building custom services.
+[OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html) is a key user tool that allows exploring and testing SAP provided OData API as well as building custom services.
 
 Standard and custom OData services offer the same capabilities and, are subjected to the same restrictions. 
 
