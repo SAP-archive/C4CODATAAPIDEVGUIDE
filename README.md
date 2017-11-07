@@ -1,7 +1,7 @@
 # SAP Cloud for Customer OData API Developer's Guide
 The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/e4d5b5e4f6d847f7ad2025f5f343e03f.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
-For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Document](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html).
+For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Documentation](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html).
 
 ## Table of Contents
 
@@ -69,7 +69,7 @@ OData Service Catalog contains the list of available OData Services in the corre
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
 ```
 
-The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html).
+The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](http://help.sap.com/saphelp_sapcloudforcustomer/en/ODATA_APIs/index.html#8e4220fa6dc943ef891fb3d0e91515d3.html).
 
 <a name="authentication"></a>
 ### Authentication
@@ -122,7 +122,7 @@ https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadat
 Labals for the entities and their properties can be retrieved by appending the query parameter <i>sap-label=true</i>.
 
 ```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label=true
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label-true
 ```
 
 To receive the UI labels in a particular language HTTP header Accept-Language can be used. Prefered language code can be set based on [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).
@@ -155,7 +155,8 @@ Deep Insert | Used with **POST**. Allows the creation of complete entity (header
 |Limitation|Workaround|
 |----------|----------|
 | C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.| See [$filter](#filter) for supported options|
-|Logical OR only works for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
+|Logical OR only works when used for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
+|Logical AND only works when used between different properties. E.g. "...$filter=OpportunityID ge '1001' and Name/content eq 'Sample*'" works. "...$filter=PartyID ge '1001' and PartyID le '2001'" not supported.| |
 |C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions.|  See [$expand](#expand) for a possible workaround when the sub-entity contains a reference to the main entity with the property *ParentObjectID*.|
 
 <a name="consuming-c4c-odata-api"></a>
@@ -841,7 +842,7 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 Option | Example | Description
 -------|---------|------------
 eq | /OpportunityCollection?$filter=AccountID eq '1001910' <br><br> /UserCollection?$filter=UserID eq '\*ADMIN\*'| Gets all Opportunity entries that matches the specified AccountID <br><br> Matches UserID containing the string ADMIN - '*' can be used as a wildcard.
-ge, le |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
+ge, le, gt, lt |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
 datetimeoffset| /AccountCollection?$filter=CreatedOn ge datetimeoffset'2015-04-01T00:00:00Z' | Accounts created on or after given datetime
 endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
@@ -987,6 +988,3 @@ Example HTTP PUT request with concurrency control:
 
 <hr>
 <center>End of File</center>
-
-
-
