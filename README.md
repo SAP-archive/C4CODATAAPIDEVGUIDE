@@ -71,6 +71,8 @@ SAP Cloud for Customer OData API supports two different authentication mechanism
 
 * Basic Authentication (username and password pair)
 * OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client [here](OAuthSAMLClient).)
+* SAML Based FrontEnd SSO authentication
+* X.509 Certificate authentication
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
