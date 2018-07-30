@@ -55,12 +55,6 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServ
 
 where myNNNNNN is the name of your tenant.
 
-Here is an example URL for a test tenant:
-
-```
-https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/
-```
-
 <a name="odata-service-catalog"></a>
 ### OData Service Catalog
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
@@ -69,7 +63,7 @@ OData Service Catalog contains the list of available OData Services in the corre
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
 ```
 
-The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](http://help.sap.com/saphelp_sapcloudforcustomer/en/ODATA_APIs/index.html#8e4220fa6dc943ef891fb3d0e91515d3.html).
+The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html).
 
 <a name="authentication"></a>
 ### Authentication
@@ -97,10 +91,10 @@ The following URL pattern differetiates the Standard and Custom OData services.
 
 <a name="odata-service-document"></a>
 ### OData Service Document
-OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entities included in C4C OData service, you can open the following URL in your browser.
+OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entity sets included in C4C OData service, you can open the following URL in your browser.
 
 ```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/ 
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/ 
 ```
 
 where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
@@ -110,19 +104,13 @@ where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ charact
 OData service metadata is retrieved via the following URL.
 
 ```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata
-```
-
-Example:
-
-```
-https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/c4codata/$metadata
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata
 ```
 
 Labals for the entities and their properties can be retrieved by appending the query parameter <i>sap-label=true</i>.
 
 ```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codata/$metadata?sap-label-true
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?sap-label=true
 ```
 
 To receive the UI labels in a particular language HTTP header Accept-Language can be used. Prefered language code can be set based on [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).
@@ -155,8 +143,7 @@ Deep Insert | Used with **POST**. Allows the creation of complete entity (header
 |Limitation|Workaround|
 |----------|----------|
 | C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.| See [$filter](#filter) for supported options|
-|Logical OR only works when used for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
-|Logical AND only works when used between different properties. E.g. "...$filter=OpportunityID ge '1001' and Name/content eq 'Sample*'" works. "...$filter=PartyID ge '1001' and PartyID le '2001'" not supported.| |
+|Logical OR only works for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
 |C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions.|  See [$expand](#expand) for a possible workaround when the sub-entity contains a reference to the main entity with the property *ParentObjectID*.|
 
 <a name="consuming-c4c-odata-api"></a>
@@ -168,7 +155,7 @@ SAP Cloud for Customer OData API supports HTTP request and response payloads in 
 
 Example:
 ```
-https://odatac4ctrial.hana.ondemand.com/proxy/sap/c4c/odata/v1/odataservicecatalog/?$format=json
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/odataservicecatalog/?$format=json
 ```
 
 will return 
@@ -203,7 +190,7 @@ In order to prevent possible [Cross-site request forgery](https://en.wikipedia.o
 
 Please follow the steps below to receive a CSRF token:
 
-First, perform an HTTP GET request to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/`) with the HTTP request header:
+First, perform an HTTP GET request to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/`) with the HTTP request header:
 
 ```
 	x-csrf-token: fetch
@@ -236,7 +223,7 @@ Here is an excerpt with the **next** link:
 			</m:properties>
 		</content>
 	</entry>
-	<link rel="next" href="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/LeadCollection/?$skiptoken=1001"/>
+	<link rel="next" href="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/LeadCollection/?$skiptoken=1001"/>
 </feed>
 ```
 
@@ -246,7 +233,7 @@ Here is an excerpt with the **next** link:
 Server side paging can also be implemented for a set number of records. In this case, $top and $skip system query options can be used together retrieve a page of records. The following example returns 100 records starting from record number 301.
 
 ```
-https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/AccountCollection?$skip=300&$top=100
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/AccountCollection?$skip=300&$top=100
 ```
 
 <a name="sample-java-client"></a>
@@ -255,7 +242,7 @@ A sample Java client demonstrating how to make OData calls to C4C is available [
 
 <a name="supported-system-query-options"></a>
 ### Supported System Query Options
-As stated above, SAP Cloud for Customer supports version 2 of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For brevity, initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata is skipped in the following examples:
+As stated above, SAP Cloud for Customer supports version 2 of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For brevity, initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi is skipped in the following examples:
 
 Query Option | Example | Description
 -------|---------|------------
@@ -842,7 +829,7 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 Option | Example | Description
 -------|---------|------------
 eq | /OpportunityCollection?$filter=AccountID eq '1001910' <br><br> /UserCollection?$filter=UserID eq '\*ADMIN\*'| Gets all Opportunity entries that matches the specified AccountID <br><br> Matches UserID containing the string ADMIN - '*' can be used as a wildcard.
-ge, le, gt, lt |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
+ge, le |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
 datetimeoffset| /AccountCollection?$filter=CreatedOn ge datetimeoffset'2015-04-01T00:00:00Z' | Accounts created on or after given datetime
 endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
@@ -854,8 +841,8 @@ startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All a
 XML response with inlinecount. The Element <m:count> contains the response to the $inlinecount.
 
 ```XML
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/c4codata/">
-	<id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection</id>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/c4codataapi/">
+	<id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/OpportunityCollection</id>
 	<title type="text">OpportunityCollection</title>
 	<updated>2015-08-23T17:30:32Z</updated>
 	<author>
@@ -864,7 +851,7 @@ XML response with inlinecount. The Element <m:count> contains the response to th
 	<link href="OpportunityCollection" rel="self" title="OpportunityCollection"/>
 	<m:count>39080</m:count>
 	<entry>
-		<id>https://myNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codata/OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</id>
+		<id>https://myNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</id>
 		<title type="text">OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</title>
 		<updated>2015-08-23T17:30:32Z</updated>
 		....
@@ -898,7 +885,7 @@ For custom OData services, it is possible to mark $search releveant entity prope
 Please note that the term passed to $search should not be bound by any quotes or double-quotes even when the term contains spaces. The following example shows the usage of the $search.:
 
 ```
-https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codata/CustomerCollection?$search=test user
+https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codataapi/CustomerCollection?$search=test user
 ```
 
 <a name="etag-support"></a>
@@ -918,9 +905,9 @@ Each C4C entity has an associated ETag (which indicates the last updated datetim
     "results": [
       {
         "__metadata": {
-          "uri": "https://my315537.crm.ondemand.com/sap/c4c/odata/v1/c4codata/
+          "uri": "https://my315537.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/
           ProductCollection('00163E03A0701EE288BE9895233EBD27')",
-          "type": "c4codata.Product",
+          "type": "c4codataapi.Product",
           "etag": "W/\"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'\""
         },
         "ObjectID": "00163E03A0701EE288BE9895233EBD27",
@@ -988,3 +975,6 @@ Example HTTP PUT request with concurrency control:
 
 <hr>
 <center>End of File</center>
+
+
+
