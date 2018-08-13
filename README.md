@@ -67,7 +67,7 @@ The catalog service returns both standard OData services delivered by SAP as wel
 
 <a name="authentication"></a>
 ### Authentication
-SAP Cloud for Customer OData API supports two different authentication mechanisms:
+SAP Cloud for Customer OData API supports the following authentication mechanisms:
 
 * Basic Authentication (username and password pair)
 * OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client [here](OAuthSAMLClient).)
