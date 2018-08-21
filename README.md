@@ -972,6 +972,7 @@ Example HTTP PUT request with concurrency control:
 
   * [Service Ticket](sections/serviceticket.md)
   * [Mass query pattern](sections/massquery.md)
+  * [Sample C4C OData API V2 calls](sections/odataapi_v2_samples.md)
 
 
 
