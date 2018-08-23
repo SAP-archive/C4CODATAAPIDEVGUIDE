@@ -1,7 +1,7 @@
 # Sample calls on the SAP Cloud for Customer OData API V2
 ## The following calls demonstrate the creation and the updating of a ServiceRequest (ticket) 
 * Deep-insert - Create a ticket with two items
-* $batch update - Update the ticket header and an item
+* $batch update - Update the ticket header and an item in a single round-trip
  
 ### Deep-insert - Create a ticket with two items
 
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 ``` 
  
-### $batch update - Update the ticket header and an item
+### $batch update - Update the ticket header and an item in a single round-trip
 ```
 POST /sap/c4c/odata/v1/c4codataapi/$batch HTTP/1.1
 Host: my<tenandId>.crm.ondemand.com
