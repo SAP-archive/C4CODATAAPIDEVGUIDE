@@ -18,7 +18,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
         - [OData Service Document](#odata-service-document)
         - [OData Service Metadata](#odata-service-metadata)
         - [Supported HTTP operations](#supported-http-operations)
-        - [OData Framework's handling of annotations](#odata-frameworks-handling-of-annotations)
+        - [SAP Cloud for Customer Annotations](#sap-cloud-for-customer-annotations)
         - [Known Limitations](#known-limitations)
     - [Consuming C4C OData API](#consuming-c4c-odata-api)
         - [Supported Formats](#supported-formats)
@@ -133,17 +133,16 @@ $batch | Used to perform multiple query, create, update and delete operations wi
 Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
 
 
-### OData Framework's handling of annotations
+### SAP Cloud for Customer Annotations
 Following table describes the OData Framework behavior as of the November, 2018 release (1811).
 |Annotation|Definition|Framework Behaviour|
 |----------|----------|-------------------|
-|Creatable = true| Property is relevant while creating a new record |OData Framework passes the value in the payload to the Business Object.|
-|Creatable = false| Property is NOT relevant for creating a new record | OData Framework raises an error if it receives a value for a property that's not creatable.|
-|Updatable = true|Property is relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
-Updatable = false|Property is NOT relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
-|filterable = true|The property can be used in $filter query parameter|If a property is set to filterable=false and $filter is used on that property OData Fwk raises an error|
-|filterable = false|filterable = false|If a property is set to filterable=false and $filter is used on that property OData FW raises an error|
-|$search|Indicated field is used in free-text search|Indicated field is used in free-text search|
+|sap:creatable = true|Property is relevant while creating a new record |OData Framework passes the value in the payload to the Business Object.|
+|sap:creatable = false|Property is NOT relevant for creating a new record | OData Framework raises an error if it receives a value for a property that's not creatable.|
+|sap:updatable = true|Property is relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
+|sap:updatable = false|Property is NOT relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
+|sap:filterable = true|The property can be used in $filter query parameter|If a property is set to filterable=false and $filter is used on that property OData Fwk raises an error|
+|sap:filterable = false|filterable = false|If a property is set to filterable=false and $filter is used on that property OData FW raises an error|
 
 ### Known Limitations
 
