@@ -134,11 +134,13 @@ Deep Insert | Used with **POST**. Allows the creation of complete entity (header
 
 
 ### SAP Cloud for Customer Annotations
+
 Following table describes the OData Framework behavior as of the November, 2018 release (1811).
+
 |Annotation|Definition|Framework Behaviour|
 |----------|----------|-------------------|
-|sap:creatable = true|Property is relevant while creating a new record |OData Framework passes the value in the payload to the Business Object.|
-|sap:creatable = false|Property is NOT relevant for creating a new record | OData Framework raises an error if it receives a value for a property that's not creatable.|
+|sap:creatable = true|Property is relevant while creating a new record|OData Framework passes the value in the payload to the Business Object.|
+|sap:creatable = false|Property is NOT relevant for creating a new record|OData Framework raises an error if it receives a value for a property that's not creatable.|
 |sap:updatable = true|Property is relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
 |sap:updatable = false|Property is NOT relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
 |sap:filterable = true|The property can be used in $filter query parameter|If a property is set to filterable=false and $filter is used on that property OData Fwk raises an error|
