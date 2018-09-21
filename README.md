@@ -7,45 +7,45 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
 
 <!-- MarkdownTOC -->
 
-- [What is OData protocol?](#what-is-odata-protocol)
-	- [OData versions](#odata-versions)
-- [SAP Cloud for Customer \(C4C\) OData Services](#sap-cloud-for-customer-c4c-odata-services)
-	- [OData Service Catalog](#odata-service-catalog)
-	- [Authentication](#authentication)
-	- [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
-	- [OData Service Document](#odata-service-document)
-	- [OData Service Metadata](#odata-service-metadata)
-	- [Supported HTTP operations](#supported-http-operations)
-	- [Known Limitations](#known-limitations)
-- [Consuming C4C OData API](#consuming-c4c-odata-api)
-	- [Supported Formats](#supported-formats)
-	- [Authentication](#authentication-1)
-	- [CSRF Token](#csrf-token)
-	- [Server side paging](#server-side-paging)
-	- [Sample Java Client](#sample-java-client)
-	- [Supported System Query Options](#supported-system-query-options)
-		- [$batch](#batch)
-		- [$expand](#expand)
-		- [$filter](#filter)
-		- [$inlinecount](#inlinecount)
-		- [$search](#search)
-	- [ETag Support](#etag-support)
-		- [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
-- [Sample Payloads](#sample-payloads)
+- [SAP Cloud for Customer OData API Developer's Guide](#sap-cloud-for-customer-odata-api-developers-guide)
+    - [Table of Contents](#table-of-contents)
+    - [What is OData protocol?](#what-is-odata-protocol)
+        - [OData versions](#odata-versions)
+    - [SAP Cloud for Customer (C4C) OData Services](#sap-cloud-for-customer-c4c-odata-services)
+        - [OData Service Catalog](#odata-service-catalog)
+        - [Authentication](#authentication)
+        - [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
+        - [OData Service Document](#odata-service-document)
+        - [OData Service Metadata](#odata-service-metadata)
+        - [Supported HTTP operations](#supported-http-operations)
+        - [OData Framework's handling of annotations](#odata-frameworks-handling-of-annotations)
+        - [Known Limitations](#known-limitations)
+    - [Consuming C4C OData API](#consuming-c4c-odata-api)
+        - [Supported Formats](#supported-formats)
+        - [Authentication](#authentication)
+        - [CSRF Token](#csrf-token)
+        - [Server side paging](#server-side-paging)
+        - [Sample Java Client](#sample-java-client)
+        - [Supported System Query Options](#supported-system-query-options)
+            - [$batch](#batch)
+            - [$expand](#expand)
+            - [$filter](#filter)
+            - [$inlinecount](#inlinecount)
+            - [$search](#search)
+        - [ETag Support](#etag-support)
+            - [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
+    - [Sample Payloads](#sample-payloads)
 
 <!-- /MarkdownTOC -->
 
-<a name="what-is-odata-protocol"></a>
 ## What is OData protocol?
 [Open Data (OData) Protocol](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=odata) is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL for a relational database system (RDBMS) as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats for querying and modifying data.
 
 For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials. 
 
-<a name="odata-versions"></a>
 ### OData versions
 SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [here](http://www.odata.org/documentation/odata-version-2-0/).
 
-<a name="sap-cloud-for-customer-c4c-odata-services"></a>
 ## SAP Cloud for Customer (C4C) OData Services
 You can try the examples shown in this document by accessing the OData API of your SAP Cloud for Customer (C4C) tenant using the following URL pattern:
 
@@ -55,7 +55,6 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServ
 
 where myNNNNNN is the name of your tenant.
 
-<a name="odata-service-catalog"></a>
 ### OData Service Catalog
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
@@ -65,7 +64,6 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServ
 
 The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html).
 
-<a name="authentication"></a>
 ### Authentication
 SAP Cloud for Customer OData API supports the following authentication mechanisms:
 
@@ -76,7 +74,6 @@ SAP Cloud for Customer OData API supports the following authentication mechanism
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
-<a name="sap-standard-vs-custom-odata-services"></a>
 ### SAP Standard vs. Custom OData Services
 
 SAP Cloud for Customer provides a standard OData API. In addition, SAP Cloud for Customer also allows customers to build their own (custom) OData services based on the predefined business objects in the solution.
@@ -91,7 +88,6 @@ The following URL pattern differetiates the Standard and Custom OData services.
 * Standard services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....`
 * Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
 
-<a name="odata-service-document"></a>
 ### OData Service Document
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entity sets included in C4C OData service, you can open the following URL in your browser.
 
@@ -101,7 +97,6 @@ https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/
 
 where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
 
-<a name="odata-service-metadata"></a>
 ### OData Service Metadata
 OData service metadata is retrieved via the following URL.
 
@@ -123,7 +118,6 @@ For example, to receive the UI labels in Turkish the HTTP request header should 
 Accept-Language:tr 
 ```
 
-<a name="supported-http-operations"></a>
 ### Supported HTTP operations
 
 C4C OData API supports the following OData/HTTP operations:
@@ -139,7 +133,18 @@ $batch | Used to perform multiple query, create, update and delete operations wi
 Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
 
 
-<a name="known-limitations"></a>
+### OData Framework's handling of annotations
+Following table describes the OData Framework behavior as of the November, 2018 release (1811).
+|Annotation|Definition|Framework Behaviour|
+|----------|----------|-------------------|
+|Creatable = true| Property is relevant while creating a new record |OData Framework passes the value in the payload to the Business Object.|
+|Creatable = false| Property is NOT relevant for creating a new record | OData Framework raises an error if it receives a value for a property that's not creatable.|
+|Updatable = true|Property is relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
+Updatable = false|Property is NOT relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
+|filterable = true|The property can be used in $filter query parameter|If a property is set to filterable=false and $filter is used on that property OData Fwk raises an error|
+|filterable = false|filterable = false|If a property is set to filterable=false and $filter is used on that property OData FW raises an error|
+|$search|Indicated field is used in free-text search|Indicated field is used in free-text search|
+
 ### Known Limitations
 
 |Limitation|Workaround|
@@ -148,9 +153,7 @@ Deep Insert | Used with **POST**. Allows the creation of complete entity (header
 |Logical OR only works for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
 |C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions.|  See [$expand](#expand) for a possible workaround when the sub-entity contains a reference to the main entity with the property *ParentObjectID*.|
 
-<a name="consuming-c4c-odata-api"></a>
 ## Consuming C4C OData API
-<a name="supported-formats"></a>
 ### Supported Formats
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
 * For HTTP GET requests, use the system query parameter `$format=json`. 
@@ -172,7 +175,6 @@ will return
 Content-Type: application/json
 ```
 
-<a name="authentication-1"></a>
 ### Authentication
 All HTTP requests should have an `Authorization` header. 
 
@@ -186,7 +188,6 @@ In the formats shown above, please note the space between `Basic`, `Bearer` and 
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
-<a name="csrf-token"></a>
 ### CSRF Token
 In order to prevent possible [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks, SAP Cloud for Customer OData API requires all modifying HTTP requests (POST/PUT/PATCH) to specify a CSRF token, in addition to the Authorization header.
 
@@ -208,7 +209,6 @@ Here is an example CSRF Token returned as part of the response header
 
 The token value retrieved above needs to be used for subsequent modifying HTTP requests (i.e. POST/PUT/PATCH).
 
-<a name="server-side-paging"></a>
 ### Server side paging
 For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
 
@@ -238,11 +238,9 @@ Server side paging can also be implemented for a set number of records. In this 
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/AccountCollection?$skip=300&$top=100
 ```
 
-<a name="sample-java-client"></a>
 ### Sample Java Client
 A sample Java client demonstrating how to make OData calls to C4C is available [here](ODataConsumerSample). The sample uses Apache Olingo library to construct and read OData payloads.
 
-<a name="supported-system-query-options"></a>
 ### Supported System Query Options
 As stated above, SAP Cloud for Customer supports version 2 of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For brevity, initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi is skipped in the following examples:
 
@@ -260,7 +258,6 @@ Query Option | Example | Description
 
 Below you will find additional details for some of the system query options.
 
-<a name="batch"></a>
 #### $batch
 Used to query, create/update multiple entities with explicit transaction boundaries specified via Changesets as a part of the payload
 
@@ -729,7 +726,6 @@ cache-control: no-cache, no-store
 ```
 
 
-<a name="expand"></a>
 #### $expand
 
 C4C OData API's support for $expand system query option is via Navigaton Properties. 
@@ -825,7 +821,6 @@ E.g. if the requirement is to get all Opportunities that have a certain Product,
 **Performance considerations:** Due to their complex nature, $expand queries require additional processing in comparison to the queries involving a single entity. Thus, in general $expand queries can be slow and in some cases considerably slow. While this should not impact the performance requirements of a result set with few records (e.g. single READ operation), when the result set contains a number of records, performance might not be ideal. Therefore, we recommend that applications should be designed accordingly and if $expand query doesn't meet the performance requirements, implement alternative methods. Due to the reasons above, queries involving $expand will only return the first 100 records and if there are more records matching the criteria, at the end of the result, a URL link to get next 100 records will be included. If a larger result set is desired, appropriate paging can be implemented via $skip and $top.
 
 
-<a name="filter"></a>
 #### $filter
 
 Option | Example | Description
@@ -837,7 +832,6 @@ endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
 
 
-<a name="inlinecount"></a>
 #### $inlinecount
 
 XML response with inlinecount. The Element <m:count> contains the response to the $inlinecount.
@@ -878,7 +872,6 @@ JSON response with inlinecount. The attribute __count contains the response to t
         ...
 ```
 
-<a name="search"></a>
 #### $search
 Although it is not part of OData V2 specification, $search is supported by C4C OData API. Once $search is performed, C4C OData API compares the term provided to $search against the properties marked as $search relevant in OData Service Expolorer. Standard C4C OData services are delievered with $search relevant properties marked. 
 
@@ -890,7 +883,6 @@ Please note that the term passed to $search should not be bound by any quotes or
 https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codataapi/CustomerCollection?$search=test user
 ```
 
-<a name="etag-support"></a>
 ### ETag Support
 [HTTP ETag](https://en.wikipedia.org/wiki/HTTP_ETag) (entity tag) is mainly used for [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) and client side caching of data. Since C4C 1602, OData API provides support for weak validation of ETags.
 
@@ -942,7 +934,6 @@ etag →W/"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'"   <<========== ETag
 x-csrf-token →dQOr2DmqinUDkzVKub0L4A==
 ```
 
-<a name="optimistic-concurrency-control-with-etag"></a>
 #### Optimistic Concurrency Control with ETag
 When ETag is used for optimistic concurrency control following scenario is implemented:
 
@@ -966,8 +957,6 @@ Example HTTP PUT request with concurrency control:
 
 ```
 
-
-<a name="sample-payloads"></a>
 ## Sample Payloads
 
   * [Service Ticket](sections/serviceticket.md)
