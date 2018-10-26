@@ -146,6 +146,8 @@ Following table describes the OData Framework behavior as of the November, 2018 
 |sap:filterable = true|The property can be used in $filter query parameter|If a property is set to filterable=false and $filter is used on that property OData Fwk raises an error|
 |sap:filterable = false|filterable = false|If a property is set to filterable=false and $filter is used on that property OData FW raises an error|
 
+**Note**: The "Nullable" attribute indicates if the underlying field in the database allows null values. It is only relevant for the API consumers when combined with sap:creatable and sap:updatable annotations. For example: A property with the combination of Nullable=false AND sap:creatable = true attributes indicates that the a value for the propety is Mandatory (required). 
+
 ### Known Limitations
 
 |Limitation|Workaround|
