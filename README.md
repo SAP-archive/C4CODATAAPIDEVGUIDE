@@ -140,11 +140,11 @@ Following table describes the OData Framework behavior as of the November, 2018 
 |Annotation|Definition|Framework Behaviour|
 |----------|----------|-------------------|
 |sap:creatable = true|Property is relevant while creating a new record|OData Framework passes the value in the payload to the Business Object.|
-|sap:creatable = false|Property is NOT relevant for creating a new record|OData Framework passes the value in the payload to the Business Object.|
+|sap:creatable = false|Property is NOT relevant for creating a new record|OData Framework raises an error if it receives a value for the property.|
 |sap:updatable = true|Property is relevant while updating a record|OData Framework passes the value in the payload to the Business Object.|
-|sap:updatable = false|Property is NOT relevant while updating a record|OData Framework passes the value in the payload to the Business Object.|
+|sap:updatable = false|Property is NOT relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
 |sap:filterable = true|The property can be used in $filter query parameter|OData Framework passes the filter value to the Business Object.|
-|sap:filterable = false|filterable = false|If a property is set to filterable=false and $filter is used on that property OData FW raises an error|
+|sap:filterable = false|filterable = false|If $filter is used on that property OData framework raises an error|
 
 **Exception**: If a property has the attributes sap:creatable = false and Nullable = false (usually the case for ObjectID property as the value is auto-generated); OData Framework will ignore any value provided for such properties without raising an error.
 
