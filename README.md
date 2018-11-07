@@ -250,7 +250,7 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/CorporateAccountC
 Query to retrieve the 4th page of records (with a page size of 100):
 
 ```
-https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/AccountCollection?$skip=300&$top=100
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection?$skip=300&$top=100
 ```
 
 ### Sample Java Client
