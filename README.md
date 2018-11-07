@@ -239,7 +239,7 @@ Here is an excerpt with the **next** link:
 
 ### Client side paging
 
-Alternative to server side paging where the page size is determined by the server (i.e. 1000 records per page), one can also implement paging at the client side for any page size. In this case, $top and $skip system query options can be used together retrieve a page of records. In order to determine the number of pages, one can use the $count to get the number of records matching the query. The following example returns 100 records (i.e. page size of 100) starting from record number 301.
+Alternative to server side paging where the page size is determined by the server (i.e. 1000 records per page), one can also implement paging at the client side for any page size. In this case, $top and $skip system query options can be used together  to retrieve a page of records. In order to determine the number of pages, one can use the $count to get the number of records matching the query. The following example returns 100 records (i.e. page size of 100) starting from record number 301.
 
 Query to retrieve the number of CorporateAccounts in the US:
 
