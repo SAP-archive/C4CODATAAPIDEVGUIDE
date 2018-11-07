@@ -25,6 +25,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
         - [Authentication](#authentication)
         - [CSRF Token](#csrf-token)
         - [Server side paging](#server-side-paging)
+        - [Client side paging](#client-side-paging)
         - [Sample Java Client](#sample-java-client)
         - [Supported System Query Options](#supported-system-query-options)
             - [$batch](#batch)
@@ -236,8 +237,17 @@ Here is an excerpt with the **next** link:
 
 (in this specific case the LeadCollection entity set is being queried).
 
+### Client side paging
 
-Server side paging can also be implemented for a set number of records. In this case, $top and $skip system query options can be used together retrieve a page of records. The following example returns 100 records starting from record number 301.
+Alternative to server side paging where the page size is determined by the server (i.e. 1000 records per page), one can also implement paging at the client side for any page size. In this case, $top and $skip system query options can be used together retrieve a page of records. In order to determine the number of pages, one can use the $count to get the number of records matching the query. The following example returns 100 records (i.e. page size of 100) starting from record number 301.
+
+Query to retrieve the number of CorporateAccounts in the US:
+
+```
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection/$count?$filter=CountryCode eq 'US'
+```
+
+Query to retrieve the 4th page of records (with a page size of 100):
 
 ```
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/AccountCollection?$skip=300&$top=100
