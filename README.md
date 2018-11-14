@@ -147,9 +147,11 @@ Following table describes the OData Framework behavior as of the November, 2018 
 |sap:filterable = true|The property can be used in $filter query parameter|OData Framework passes the filter value to the Business Object.|
 |sap:filterable = false|filterable = false|If $filter is used on that property OData framework raises an error|
 
-**Exception**: If a property has the attributes sap:creatable = false and Nullable = false (usually the case for ObjectID property as the value is auto-generated); OData Framework will ignore any value provided for such properties without raising an error.
+**Exception**:
+* In an POST (create) call, if a property has the attributes **sap:creatable = false** and **Nullable = false** (usually the case for ObjectID property as the value is auto-generated), OData framework will silently ignore the provided value.
+* During a PUT/PATCH (update) call, values passed for **ETag** and **Code Descriptions** (e.g. StatusCodeText, CountryCodeText, etc.) will be silently ignored. 
 
-**Note**: The "Nullable" attribute indicates if the underlying field in the database allows null values. It is only relevant for the API consumers when combined with sap:creatable and sap:updatable annotations. For example: A property with the combination of Nullable=false AND sap:creatable = true attributes indicates that the a value for the propety is Mandatory (required). 
+**Note**: The "Nullable" attribute indicates if the underlying field in the database allows null values. It is only relevant for the API consumers when combined with **sap:creatable** and **sap:updatable** annotations. For example: A property with the combination of **Nullable=false** AND **sap:creatable = true** attributes indicates that the a value for the propety is Mandatory (required). 
 
 ### Known Limitations
 
