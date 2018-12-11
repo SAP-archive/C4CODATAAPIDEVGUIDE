@@ -217,6 +217,8 @@ Here is an example CSRF Token returned as part of the response header
 
 The token value retrieved above needs to be used for subsequent modifying HTTP requests (i.e. POST/PUT/PATCH).
 
+*Note*: CSRF token handling is not required for scenarios involving server-to-server communication - e.g. OAuth based authentication and client certificate based authentication.
+
 ### Server side paging
 For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
 
