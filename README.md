@@ -160,6 +160,7 @@ Following table describes the OData Framework behavior as of the November, 2018 
 | C4C OData API **DOES NOT** support usage of String, Date and Math Functions in $filter System Query Option.| See [$filter](#filter) for supported options|
 |Logical OR only works for the same property. E.g. "...$filter=PartyID eq '1001' or PartyID eq '1002'" works. "...$filter=PartyID eq '1001' or TerritoryID eq 'CA'" not supported.| Each or segment can be executed as a seperate query, and the results can be collated. E.g. : 1st Query - " ...$filter=PartyID eq '1001'" 2nd Query - "$filter=TerritoryID eq 'CA'". In order to reduce round trips to the server, multiple queries can be executed as part of a $batch query.|
 |C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions.|  See [$expand](#expand) for a possible workaround when the sub-entity contains a reference to the main entity with the property *ParentObjectID*.|
+|[$search]($search) system query option is not supported as part of a $batch call.|Instead, a consumer can execute multiple GET calls with $search in parallel and consolidate the results|
 
 ## Consuming C4C OData API
 ### Supported Formats
@@ -901,6 +902,9 @@ Please note that the term passed to $search should not be bound by any quotes or
 ```
 https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codataapi/CustomerCollection?$search=test user
 ```
+
+**Note**: $search is not supported as part of a $batch request.
+
 
 ### ETag Support
 [HTTP ETag](https://en.wikipedia.org/wiki/HTTP_ETag) (entity tag) is mainly used for [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) and client side caching of data. Since C4C 1602, OData API provides support for weak validation of ETags.
