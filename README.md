@@ -224,7 +224,7 @@ The token value retrieved above needs to be used for subsequent modifying HTTP r
 ### Custom Headers
 |Custom Header|Description|
 |----------|----------|
-|odata-no-codedescs|Prevent fetching of code descriptions and improve performance|
+|odata-no-codedescs|Prevent fetching of code descriptions to improve performance|
 
 ### Server side paging
 For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
