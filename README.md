@@ -24,6 +24,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
         - [Supported Formats](#supported-formats)
         - [Authentication](#authentication)
         - [CSRF Token](#csrf-token)
+        - [Custom Headers](#custom-headers)
         - [Server side paging](#server-side-paging)
         - [Client side paging](#client-side-paging)
         - [Sample Java Client](#sample-java-client)
@@ -219,6 +220,11 @@ Here is an example CSRF Token returned as part of the response header
 The token value retrieved above needs to be used for subsequent modifying HTTP requests (i.e. POST/PUT/PATCH).
 
 *Note*: CSRF token handling is not required for scenarios involving server-to-server communication - e.g. OAuth based authentication and client certificate based authentication.
+
+### Custom Headers
+|Custom Header|Description|
+|----------|----------|
+|odata-no-codedescs|Prevent fetching of code descriptions and improve performance|
 
 ### Server side paging
 For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
