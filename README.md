@@ -224,7 +224,8 @@ The token value retrieved above needs to be used for subsequent modifying HTTP r
 ### Custom Headers
 |Custom Header|Description|
 |----------|----------|
-|odata-no-codedescs|Prevent fetching of code descriptions to improve performance|
+|odata-no-codedescs|Prevent server sending the descriptions for code properties i.e. the Text Properties back to the client after reading data. Send *true*, if Code Descriptions shouldn't be returned after reading data.|
+|odata-no-response-payload|Prevent server sending the created entity back to the client after a POST request. Send *true*, if an entity shouldn't be returned after a successful POST call|
 
 ### Server side paging
 For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
