@@ -147,6 +147,7 @@ Following table describes the OData Framework behavior as of the November, 2018 
 |sap:updatable = false|Property is NOT relevant while updating a record|OData framework raises an error if the value is different from the one that exists in the Business Object.|
 |sap:filterable = true|The property can be used in $filter query parameter|OData Framework passes the filter value to the Business Object.|
 |sap:filterable = false|filterable = false|If $filter is used on that property OData framework raises an error|
+|c4c:context-property|The annotation provides the context for the property|E.g. Country is the context for the property RegionCode (i.e. State).|
 
 **Exception**:
 * In an POST (create) call, if a property has the attributes **sap:creatable = false** and **Nullable = false** (usually the case for ObjectID property as the value is auto-generated), OData framework will silently ignore the provided value.
