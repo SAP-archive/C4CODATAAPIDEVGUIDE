@@ -194,6 +194,7 @@ Authentication Method |HTTP Header
 -------|---------
 Basic authentication | `Authorization: Basic _base64_encoded_value_of_username:password_`
 OAuth SAML bearer flow  | `Authorization: Bearer _OAuth_token_` 
+SAML Based frontend SSO | Use the SSO URL of the tenant with odata-sso in the OData service path. For example:  ```https://myxxxxxx-sso.crm.ondemand.com/sap/c4c/odata-sso/c4codataapi```
 
 In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
@@ -859,6 +860,12 @@ datetimeoffset| /AccountCollection?$filter=CreatedOn ge datetimeoffset'2015-04-0
 endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
 startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
 
+##### Filtering for delta changes
+As of 1911 release, filtering for delta changes can be done using the property *EntityLastChangedOn*. For example, to get the number of Opportunities changed since (including) October 1st, 2019:
+```
+.../OpportunityCollection/$count?$filter=EntityLastChangedOn ge datetimeoffset’2019-10-01T00:00:00Z'
+
+```
 
 #### $inlinecount
 
