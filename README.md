@@ -13,7 +13,6 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
         - [OData versions](#odata-versions)
     - [SAP Cloud for Customer (C4C) OData Services](#sap-cloud-for-customer-c4c-odata-services)
         - [OData Service Catalog](#odata-service-catalog)
-        - [Authentication](#authentication)
         - [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
         - [OData Service Document](#odata-service-document)
         - [OData Service Metadata](#odata-service-metadata)
@@ -65,16 +64,6 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServ
 ```
 
 The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html).
-
-### Authentication
-SAP Cloud for Customer OData API supports the following authentication mechanisms:
-
-* Basic Authentication (username and password pair)
-* OAuth SAML Bearer flow (you can find sample Java implementation of OAuth SAML bearer client [here](OAuthSAMLClient).)
-* SAML Based FrontEnd SSO authentication
-* X.509 Certificate authentication
-
-Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
 ### SAP Standard vs. Custom OData Services
 
@@ -187,18 +176,19 @@ Content-Type: application/json
 ```
 
 ### Authentication
-All HTTP requests should have an `Authorization` header. 
-
+SAP Cloud for Customer OData API supports the following authentication mechanisms:
 
 Authentication Method |HTTP Header
 -------|---------
 Basic authentication | `Authorization: Basic _base64_encoded_value_of_username:password_`
 OAuth SAML bearer flow  | `Authorization: Bearer _OAuth_token_` 
 SAML Based frontend SSO | Use the SSO URL of the tenant with odata-sso in the OData service path. For example:  ```https://myxxxxxx-sso.crm.ondemand.com/sap/c4c/odata-sso/c4codataapi```
+X.509 Certificate authentication | See the configuration steps below
 
-In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
-
-Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
+Please note:  
+* The C4C system used in the example URLs throughout this document, doesn't require authentication.
+* All HTTP requests should have an `Authorization` header. 
+* In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
 #### Configuring Client Certificate based authentication for your user
 1. Import client certificatre (.p12) into the OS' keystore
