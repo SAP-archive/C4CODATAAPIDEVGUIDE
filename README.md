@@ -76,16 +76,6 @@ SAP Cloud for Customer OData API supports the following authentication mechanism
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
 
-#### Configuring Client Certificate based authentication for your user
-1. Import client certificatre (.p12) into the OS' keystore
-** On Mac use Keychain Access
-** On Windows use Chrome/Internet Explorer (settings, advanced, manage certificates) into the Personal folder
-2. Go to your C4C tenant URL with your browser where you will see a certificate pop up, accept the certificate
-3. Provide your credentials in the pop-up and logon as usual
-4. In HTML5 UI, Go to Personalize / My Settings / Manage Certifcates and Assign the Certificate
-5. Next time when you will logon with the assigned certificate - you may see a popup to select a certificate if multipe certificates are available
-
-
 ### SAP Standard vs. Custom OData Services
 
 SAP Cloud for Customer provides a standard OData API. In addition, SAP Cloud for Customer also allows customers to build their own (custom) OData services based on the predefined business objects in the solution.
@@ -209,6 +199,15 @@ SAML Based frontend SSO | Use the SSO URL of the tenant with odata-sso in the OD
 In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
 Please note that the C4C system used in the example URLs throughout this document, doesn't require authentication.
+
+#### Configuring Client Certificate based authentication for your user
+1. Import client certificatre (.p12) into the OS' keystore
+** On Mac use Keychain Access
+** On Windows use Chrome/Internet Explorer (settings, advanced, manage certificates) into the Personal folder
+2. Go to your C4C tenant URL with your browser where you will see a certificate pop up, accept the certificate
+3. Provide your credentials in the pop-up and logon as usual
+4. In HTML5 UI, Go to Personalize / My Settings / Manage Certifcates and Assign the Certificate
+5. Next time when you will logon with the assigned certificate - you may see a popup to select a certificate if multipe certificates are available
 
 ### CSRF Token
 In order to prevent possible [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks, SAP Cloud for Customer OData API requires all modifying HTTP requests (POST/PUT/PATCH) to specify a CSRF token, in addition to the Authorization header.
