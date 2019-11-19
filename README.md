@@ -191,16 +191,11 @@ Please note:
 * In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
 #### Technical / Integration User based Authentication
-The following authentication methods are available:
-* Basic Authentication
-* Certificate-Based Authentication
-
-##### Certificate-based authentication
 To create an integration user, follow these instructions:
 * Define a communication system.
 * Define a communication arrangement.
-* Select the communication scenario OData Services for Business Objects.
-* Select an authentication method.
+* Select the communication scenario *OData Services for Business Objects*.
+* Select an authentication method (Basic Authentication or Certificate based Authentication)
 * Select OData services to provide access.
 
 ### CSRF Token
