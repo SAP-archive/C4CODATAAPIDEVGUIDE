@@ -1,65 +1,70 @@
 # SAP Cloud for Customer OData API Developer's Guide
+
 The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/e4d5b5e4f6d847f7ad2025f5f343e03f.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
-For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Documentation](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html).
+For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Documentation](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/latest/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html).
 
 ## Table of Contents
-
 <!-- MarkdownTOC -->
-
 - [SAP Cloud for Customer OData API Developer's Guide](#sap-cloud-for-customer-odata-api-developers-guide)
-    - [Table of Contents](#table-of-contents)
-    - [What is OData protocol?](#what-is-odata-protocol)
-        - [OData versions](#odata-versions)
-    - [SAP Cloud for Customer (C4C) OData Services](#sap-cloud-for-customer-c4c-odata-services)
-        - [OData Service Catalog](#odata-service-catalog)
-        - [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
-        - [OData Service Document](#odata-service-document)
-        - [OData Service Metadata](#odata-service-metadata)
-        - [Supported HTTP operations](#supported-http-operations)
-        - [SAP Cloud for Customer Annotations](#sap-cloud-for-customer-annotations)
-        - [Known Limitations](#known-limitations)
-    - [Consuming C4C OData API](#consuming-c4c-odata-api)
-        - [Supported Formats](#supported-formats)
-        - [Authentication](#authentication)
-        - [CSRF Token](#csrf-token)
-        - [Custom Headers](#custom-headers)
-        - [Server side paging](#server-side-paging)
-        - [Client side paging](#client-side-paging)
-        - [Sample Java Client](#sample-java-client)
-        - [Supported System Query Options](#supported-system-query-options)
-            - [$batch](#batch)
-            - [$expand](#expand)
-            - [$filter](#filter)
-            - [$inlinecount](#inlinecount)
-            - [$search](#search)
-        - [ETag Support](#etag-support)
-            - [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
-    - [Sample Payloads](#sample-payloads)
+  - [Table of Contents](#table-of-contents)
+  - [What is OData protocol?](#what-is-odata-protocol)
+    - [OData versions](#odata-versions)
+  - [SAP Cloud for Customer (C4C) OData Services](#sap-cloud-for-customer-c4c-odata-services)
+    - [OData Service Catalog](#odata-service-catalog)
+    - [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
+    - [OData Service Document](#odata-service-document)
+    - [OData Service Metadata](#odata-service-metadata)
+    - [Supported HTTP operations](#supported-http-operations)
+    - [SAP Cloud for Customer Annotations](#sap-cloud-for-customer-annotations)
+    - [Known Limitations](#known-limitations)
+  - [Consuming C4C OData API](#consuming-c4c-odata-api)
+    - [Supported Formats](#supported-formats)
+    - [Authentication](#authentication)
+      - [Technical / Integration User based Authentication](#technical--integration-user-based-authentication)
+    - [CSRF Token](#csrf-token)
+    - [Custom Headers](#custom-headers)
+    - [Server side paging](#server-side-paging)
+    - [Client side paging](#client-side-paging)
+    - [Sample Java Client](#sample-java-client)
+    - [Supported System Query Options](#supported-system-query-options)
+      - [$batch](#batch)
+      - [$expand](#expand)
+      - [$filter](#filter)
+        - [Filtering for delta changes](#filtering-for-delta-changes)
+      - [$inlinecount](#inlinecount)
+      - [$search](#search)
+    - [ETag Support](#etag-support)
+      - [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
+  - [Sample Payloads](#sample-payloads)
 
 <!-- /MarkdownTOC -->
 
 ## What is OData protocol?
+
 [Open Data (OData) Protocol](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=odata) is an OASIS standard that defines best practices for building and consuming RESTful APIs. It is based on HTTP protocol and provides metadata for the entities it exposes and their relationships. In some ways, it is similar to SQL for a relational database system (RDBMS) as it provides querying options such as filtering, ordering results, support for pagination, number of records and more. It supports both XML (Atom) and JSON formats for querying and modifying data.
 
 For more information on OData please refer to http://www.odata.org where you can find detailed documentation and tutorials. 
 
 ### OData versions
+
 SAP Cloud for Customer, specifically, supports the V2.0 of the OData protocol (with some additional enhancements and a few limitations), you can read the details of OData V2 [here](http://www.odata.org/documentation/odata-version-2-0/).
 
 ## SAP Cloud for Customer (C4C) OData Services
+
 You can try the examples shown in this document by accessing the OData API of your SAP Cloud for Customer (C4C) tenant using the following URL pattern:
 
-```
+```http
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
 ```
 
 where myNNNNNN is the name of your tenant.
 
 ### OData Service Catalog
+
 OData Service Catalog contains the list of available OData Services in the corresponding C4C tenant. In order to get the list of available OData services in your C4C tenant use the following URL:
 
-```
+```http
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
 ```
 
@@ -75,29 +80,30 @@ Standard and custom OData services offer the same capabilities and, are subjecte
 
 The following URL pattern differetiates the Standard and Custom OData services.
 
-
-* Standard services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....`
-* Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
+- Standard services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/....`
+- Custom services - `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/cust/v1/...`
 
 ### OData Service Document
+
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entity sets included in C4C OData service, you can open the following URL in your browser.
 
-```
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/ 
+```http
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/
 ```
 
 where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
 
 ### OData Service Metadata
+
 OData service metadata is retrieved via the following URL.
 
-```
+```http
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata
 ```
 
-Labals for the entities and their properties can be retrieved by appending the query parameter <i>sap-label=true</i>.
+Labals for the entities and their properties can be retrieved by appending the query parameter _sap-label=true_.
 
-```
+```http
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?sap-label=true
 ```
 
@@ -105,8 +111,8 @@ To receive the UI labels in a particular language HTTP header Accept-Language ca
 
 For example, to receive the UI labels in Turkish the HTTP request header should be set as below:
 
-```
-Accept-Language:tr 
+```http
+Accept-Language:tr
 ```
 
 ### Supported HTTP operations
@@ -123,7 +129,6 @@ DELETE | Used to delete an entity record
 $batch | Used to perform multiple query, create, update and delete operations with explicit transaction boundaries specified via Changesets as a part of the payload
 Deep Insert | Used with **POST**. Allows the creation of complete entity (header entry, child entries etc) with a single POST request
 
-
 ### SAP Cloud for Customer Annotations
 
 Following table describes the OData Framework behavior as of the November, 2018 release (1811).
@@ -139,10 +144,11 @@ Following table describes the OData Framework behavior as of the November, 2018 
 |c4c:context-property|The annotation provides the context for the property|E.g. Country is the context for the property RegionCode (i.e. State).|
 
 **Exception**:
-* In an POST (create) call, if a property has the attributes **sap:creatable = false** and **Nullable = false** (usually the case for ObjectID property as the value is auto-generated), OData framework will silently ignore the provided value.
-* During a PUT/PATCH (update) call, values passed for **ETag** and **Code Descriptions** (e.g. StatusCodeText, CountryCodeText, etc.) will be silently ignored. 
 
-**Note**: The "Nullable" attribute indicates if the underlying field in the database allows null values. It is only relevant for the API consumers when combined with **sap:creatable** and **sap:updatable** annotations. For example: A property with the combination of **Nullable=false** AND **sap:creatable = true** attributes indicates that the a value for the propety is Mandatory (required). 
+- In an POST (create) call, if a property has the attributes **sap:creatable = false** and **Nullable = false** (usually the case for ObjectID property as the value is auto-generated), OData framework will silently ignore the provided value.
+- During a PUT/PATCH (update) call, values passed for **ETag** and **Code Descriptions** (e.g. StatusCodeText, CountryCodeText, etc.) will be silently ignored. 
+
+**Note**: The "Nullable" attribute indicates if the underlying field in the database allows null values. It is only relevant for the API consumers when combined with **sap:creatable** and **sap:updatable** annotations. For example: A property with the combination of **Nullable=false** AND **sap:creatable = true** attributes indicates that the a value for the propety is Mandatory (required).
 
 ### Known Limitations
 
@@ -154,28 +160,33 @@ Following table describes the OData Framework behavior as of the November, 2018 
 |[$search](#search) system query option is not supported as part of a $batch call.|Instead, a consumer can execute multiple GET calls with $search in parallel and consolidate the results|
 
 ## Consuming C4C OData API
+
 ### Supported Formats
+
 SAP Cloud for Customer OData API supports HTTP request and response payloads in both Atom (XML) and JSON formats. The default payload format is Atom (XML). In order to use JSON format please follow the instructions below:
-* For HTTP GET requests, use the system query parameter `$format=json`. 
+
+- For HTTP GET requests, use the system query parameter `$format=json`.
 
 Example:
-```
+
+```http
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/odataservicecatalog/?$format=json
 ```
 
-will return 
+will return
 
 ```JSON
 {"d":{"EntitySets":["ODataServiceCollection"]}}
 ```
 
-* For HTTP POST/PATCH/PUT requests with JSON payload, set the HTTP `Content-Type` header as below:
+- For HTTP POST/PATCH/PUT requests with JSON payload, set the HTTP `Content-Type` header as below:
 
-```
+```http
 Content-Type: application/json
 ```
 
 ### Authentication
+
 SAP Cloud for Customer OData API supports the following authentication mechanisms:
 
 Authentication Method |HTTP Header
@@ -185,49 +196,55 @@ OAuth SAML bearer flow  | `Authorization: Bearer _OAuth_token_`
 SAML Based frontend SSO | Use the SSO URL of the tenant with odata-sso in the OData service path. For example:  ```https://myxxxxxx-sso.crm.ondemand.com/sap/c4c/odata-sso/c4codataapi```
 Techical/Integration User | See the configuration steps below
 
-Please note:  
-* The C4C system used in the example URLs throughout this document, doesn't require authentication.
-* All HTTP requests should have an `Authorization` header. 
-* In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
+Please note:
+
+- The C4C system used in the example URLs throughout this document, doesn't require authentication.
+- All HTTP requests should have an `Authorization` header. 
+- In the formats shown above, please note the space between `Basic`, `Bearer` and the values following them respectively.
 
 #### Technical / Integration User based Authentication
+
 To create an integration user, follow these instructions:
-* Define a communication system.
-* Define a communication arrangement.
-* Select the communication scenario *OData Services for Business Objects*.
-* Select an authentication method (Basic Authentication or Certificate based Authentication)
-* Select OData services to provide access.
+
+- Define a communication system.
+- Define a communication arrangement.
+- Select the communication scenario *OData Services for Business Objects*.
+- Select an authentication method (Basic Authentication or Certificate based Authentication)
+- Select OData services to provide access.
 
 ### CSRF Token
+
 In order to prevent possible [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) attacks, SAP Cloud for Customer OData API requires all modifying HTTP requests (POST/PUT/PATCH) to specify a CSRF token, in addition to the Authorization header.
 
 Please follow the steps below to receive a CSRF token:
 
 First, perform an HTTP GET request to the service end-point (e.g. retrieve the service document end-point `https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/`) with the HTTP request header:
 
-```
-	x-csrf-token: fetch
+```http
+x-csrf-token: fetch
 ```
 
 After a successful call, the C4C server will respond with the expected response payload and a CSRF token in the respective response `X-CSRF-Token`. 
 
 Here is an example CSRF Token returned as part of the response header 
 
-```
-	x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==
+```http
+x-csrf-token: Xi6wOfG-O55Wt8ZkhYW0eA==
 ```
 
 The token value retrieved above needs to be used for subsequent modifying HTTP requests (i.e. POST/PUT/PATCH).
 
-*Note*: CSRF token handling is not required for scenarios involving server-to-server communication - e.g. OAuth based authentication and client certificate based authentication.
+**Note**: CSRF token handling is not required for scenarios involving server-to-server communication - e.g. OAuth based, client certificate based authentication and integration (technical) user.
 
 ### Custom Headers
+
 |Custom Header|Description|
 |----------|----------|
 |odata-no-codedescs|Prevent server sending the descriptions for code properties i.e. the Text Properties back to the client after reading data. Send *true*, if Code Descriptions shouldn't be returned after reading data.|
 |odata-no-response-payload|Prevent server sending the created entity back to the client after a POST request. Send *true*, if an entity shouldn't be returned after a successful POST call|
 
 ### Server side paging
+
 For HTTP GET requests, if no query options are specified, the server enforces paging in order to provide better performance. Currently the page size is fixed at 1000 entries. 
 
 If there are more than 1000 entries, the server includes a `<link re"next" href="...` element that can be used to retrieve the next 1000 entries. 
@@ -236,14 +253,14 @@ Here is an excerpt with the **next** link:
 
 ```XML
 ...
-				<d:StartDate>2012-08-25T00:00:00</d:StartDate>
-				<d:StatusCode>6</d:StatusCode>
-				<d:StatusCodeText>Converted</d:StatusCodeText>
-				<d:UUID>00163E03-A070-1EE2-8BE6-D1A72CF7B7D6</d:UUID>
-			</m:properties>
-		</content>
-	</entry>
-	<link rel="next" href="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/LeadCollection/?$skiptoken=1001"/>
+                <d:StartDate>2012-08-25T00:00:00</d:StartDate>
+                <d:StatusCode>6</d:StatusCode>
+                <d:StatusCodeText>Converted</d:StatusCodeText>
+                <d:UUID>00163E03-A070-1EE2-8BE6-D1A72CF7B7D6</d:UUID>
+            </m:properties>
+        </content>
+    </entry>
+    <link rel="next" href="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/LeadCollection/?$skiptoken=1001"/>
 </feed>
 ```
 
@@ -255,21 +272,23 @@ Alternative to server side paging where the page size is determined by the serve
 
 Query to retrieve the number of CorporateAccounts in the US:
 
-```
+```http
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection/$count?$filter=CountryCode eq 'US'
 ```
 
 Query to retrieve the 4th page of records (with a page size of 100):
 
-```
+```http
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/CorporateAccountCollection?$skip=300&$top=100
 ```
 
 ### Sample Java Client
+
 A sample Java client demonstrating how to make OData calls to C4C is available [here](ODataConsumerSample). The sample uses Apache Olingo library to construct and read OData payloads.
 
 ### Supported System Query Options
-As stated above, SAP Cloud for Customer supports version 2 of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For brevity, initial part of the URL https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi is skipped in the following examples:
+
+As stated above, SAP Cloud for Customer supports version 2 of the OData protocol. Here we list the set of system query options that are supported by the C4C OData implementation. For brevity, initial part of the URL <https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi> is skipped in the following examples:
 
 Query Option | Example | Description
 -------|---------|------------
@@ -286,9 +305,11 @@ Query Option | Example | Description
 Below you will find additional details for some of the system query options.
 
 #### $batch
+
 Used to query, create/update multiple entities with explicit transaction boundaries specified via Changesets as a part of the payload
 
 The following example;
+
 - retrieves top 3 entries from the ServiceRequestCollection (of the requestservice OData service)
 - updates a few properties of a ServiceRequest entry
 - creates a new ServiceRequestItem
@@ -323,11 +344,11 @@ Content-ID: 1
 Content-Length: 10000
 
 {
-	"ServiceRequestUserLifeCycleStatusCode" : "YJ",
-	"ScheduledStartDate" : "2015-10-22T00:00:00",
-	"ScheduledEndDate" : "2015-10-22T00:00:00",
-	"ScheduledStartTime" : "PT13H00M00S",
-	"ScheduledEndTime" : "PT15H00M00S"
+    "ServiceRequestUserLifeCycleStatusCode" : "YJ",
+    "ScheduledStartDate" : "2015-10-22T00:00:00",
+    "ScheduledEndDate" : "2015-10-22T00:00:00",
+    "ScheduledStartTime" : "PT13H00M00S",
+    "ScheduledEndTime" : "PT15H00M00S"
 }
 
 --changeset_guid_01
@@ -760,107 +781,109 @@ C4C OData API's support for $expand system query option is via Navigaton Propert
 E.g. `/AccountCollection?$top=10&$format=json&$expand=AccountMainAddress` Where AccountMainAddress is a Navigation Property defined in the Entity Data Model (EDM) for the Account Entity (see the Entity defintion below).
 
 ```XML
-			<EntityType Name="Account">
-				<Key>
-					<PropertyRef Name="ObjectID"/>
-				</Key>
-				<Property Name="ABCClassificationCode" Type="Edm.String" Nullable="true" MaxLength="1" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="ABCClassificationCodeText" Type="Edm.String" Nullable="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="AccountFormattedName" Type="Edm.String" Nullable="false" MaxLength="40" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="AccountID" Type="Edm.String" Nullable="true" MaxLength="10" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="AccountName" Type="Edm.String" Nullable="true" MaxLength="240" FixedLength="true" sap:creatable="false" sap:updatable="true" sap:filterable="false"/>
+    <EntityType Name="Account">
+        <Key>
+            <PropertyRef Name="ObjectID"/>
+        </Key>
+        <Property Name="ABCClassificationCode" Type="Edm.String" Nullable="true" MaxLength="1" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+        <Property Name="ABCClassificationCodeText" Type="Edm.String" Nullable="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+        <Property Name="AccountFormattedName" Type="Edm.String" Nullable="false" MaxLength="40" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+        <Property Name="AccountID" Type="Edm.String" Nullable="true" MaxLength="10" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+        <Property Name="AccountName" Type="Edm.String" Nullable="true" MaxLength="240" FixedLength="true" sap:creatable="false" sap:updatable="true" sap:filterable="false"/>
 ....
-				<NavigationProperty Name="AccountMainAddress" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountMainAddress" FromRole="Account" ToRole="AccountMainAddress"/>
-				<NavigationProperty Name="AccountNotes" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountNotes" FromRole="Account" ToRole="AccountNotes"/>
-				<NavigationProperty Name="AccountRole" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountRole" FromRole="Account" ToRole="AccountRole"/>
-				<NavigationProperty Name="AccountSalesData" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountSalesData" FromRole="Account" ToRole="AccountSalesData"/>
-				<NavigationProperty Name="AccountTeam" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountTeam" FromRole="Account" ToRole="AccountTeam"/>
-				<NavigationProperty Name="ExternalIDMapping" Relationship="http://sap.com/xi/AP/CRM/Global.Account_ExternalIDMapping" FromRole="Account" ToRole="ExternalIDMapping"/>
-			</EntityType>
-```			
+        <NavigationProperty Name="AccountMainAddress" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountMainAddress" FromRole="Account" ToRole="AccountMainAddress"/>
+        <NavigationProperty Name="AccountNotes" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountNotes" FromRole="Account" ToRole="AccountNotes"/>
+        <NavigationProperty Name="AccountRole" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountRole" FromRole="Account" ToRole="AccountRole"/>
+        <NavigationProperty Name="AccountSalesData" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountSalesData" FromRole="Account" ToRole="AccountSalesData"/>
+        <NavigationProperty Name="AccountTeam" Relationship="http://sap.com/xi/AP/CRM/Global.Account_AccountTeam" FromRole="Account" ToRole="AccountTeam"/>
+        <NavigationProperty Name="ExternalIDMapping" Relationship="http://sap.com/xi/AP/CRM/Global.Account_ExternalIDMapping" FromRole="Account" ToRole="ExternalIDMapping"/>
+    </EntityType>
+```
 
 For every entity (that is not a Header entity e.g. Account or Opportunity etc.) the C4C OData framework implicitly generates a Navigation Property to the parent entity as well as a Navigation Property to the Header entity (if the parent entity is not a Header itself). 
 
 If you consider the metadata below, the following can be seen:
 
-  * Opportunity is the Header entity
-  * OpportunityItem has the Opportunity as the Parent (as well as the Header) and 
-  * OpportunityItemRevenuePlanReporting has OpportunityItem as the Parent and Opportunity as the Header entity
+- Opportunity is the Header entity
+- OpportunityItem has the Opportunity as the Parent (as well as the Header) and 
+- OpportunityItemRevenuePlanReporting has OpportunityItem as the Parent and Opportunity as the Header entity
 
 For each of the entities below, a Navigation Property is available that allows a given Entity type to navigate to the immediate parent e.g. OpportunityItemRevenuePlanReporting has a 
 
-  * Navigation Property Opportunity that allows navigation to the Header and 
-  * Navigation Property OpportunityItem that allows navigation to the Parent.
+- Navigation Property Opportunity that allows navigation to the Header and 
+- Navigation Property OpportunityItem that allows navigation to the Parent.
 
 This pattern holds true for all OData services generated by C4C (both standard as well as custom services).
 
 ```XML
-			<EntityType Name="Opportunity">
-				<Key>
-					<PropertyRef Name="ObjectID"/>
-				</Key>
-				<Property Name="ApprovalStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ConsistencyStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ID" Type="Edm.String" Nullable="true" MaxLength="35" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="LifeCycleStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="Name" Type="Edm.String" Nullable="true" MaxLength="765" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="ObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="OriginTypeCode" Type="Edm.String" Nullable="true" MaxLength="3" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="PhaseProgressEvaluationStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="PriorityCode" Type="Edm.String" Nullable="true" MaxLength="1" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="ProcessingTypeCode" Type="Edm.String" Nullable="true" MaxLength="4" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<NavigationProperty Name="OpportunityItem" Relationship="cust.Opportunity_OpportunityItem" FromRole="Opportunity" ToRole="OpportunityItem"/>
-			</EntityType>
-			<EntityType Name="OpportunityItem">
-				<Key>
-					<PropertyRef Name="ObjectID"/>
-				</Key>
-				<Property Name="ID" Type="Edm.String" Nullable="true" MaxLength="10" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="NetAmount" Type="cust.Amount" Nullable="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ParentObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ProductID" Type="Edm.String" Nullable="true" MaxLength="60" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="Quantity" Type="cust.Quantity" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<NavigationProperty Name="Opportunity" Relationship="cust.Opportunity_OpportunityItem" FromRole="OpportunityItem" ToRole="Opportunity"/>
-				<NavigationProperty Name="OpportunityItemRevenuePlanReporting" Relationship="cust.OpportunityItem_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItem" ToRole="OpportunityItemRevenuePlanReporting"/>
-			</EntityType>
-			<EntityType Name="OpportunityItemRevenuePlanReporting">
-				<Key>
-					<PropertyRef Name="ObjectID"/>
-				</Key>
-				<Property Name="DistributionAmount" Type="cust.Amount" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="DistributionDate" Type="Edm.DateTime" Nullable="true" Precision="8" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="ObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ParentObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-				<Property Name="ReportingCurrencyDistributionAmount" Type="cust.Amount" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<Property Name="RevenuePartnerUUID" Type="Edm.Guid" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
-				<NavigationProperty Name="Opportunity" Relationship="cust.Opportunity_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItemRevenuePlanReporting" ToRole="Opportunity"/>
-				<NavigationProperty Name="OpportunityItem" Relationship="cust.OpportunityItem_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItemRevenuePlanReporting" ToRole="OpportunityItem"/>
-			</EntityType>
-```			
+<EntityType Name="Opportunity">
+    <Key>
+        <PropertyRef Name="ObjectID"/>
+    </Key>
+    <Property Name="ApprovalStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ConsistencyStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ID" Type="Edm.String" Nullable="true" MaxLength="35" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="LifeCycleStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="Name" Type="Edm.String" Nullable="true" MaxLength="765" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="ObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="OriginTypeCode" Type="Edm.String" Nullable="true" MaxLength="3" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="PhaseProgressEvaluationStatusCode" Type="Edm.String" Nullable="true" MaxLength="2" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="PriorityCode" Type="Edm.String" Nullable="true" MaxLength="1" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="ProcessingTypeCode" Type="Edm.String" Nullable="true" MaxLength="4" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <NavigationProperty Name="OpportunityItem" Relationship="cust.Opportunity_OpportunityItem" FromRole="Opportunity" ToRole="OpportunityItem"/>
+</EntityType>
+<EntityType Name="OpportunityItem">
+    <Key>
+        <PropertyRef Name="ObjectID"/>
+    </Key>
+    <Property Name="ID" Type="Edm.String" Nullable="true" MaxLength="10" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="NetAmount" Type="cust.Amount" Nullable="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ParentObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ProductID" Type="Edm.String" Nullable="true" MaxLength="60" FixedLength="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="Quantity" Type="cust.Quantity" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <NavigationProperty Name="Opportunity" Relationship="cust.Opportunity_OpportunityItem" FromRole="OpportunityItem" ToRole="Opportunity"/>
+    <NavigationProperty Name="OpportunityItemRevenuePlanReporting" Relationship="cust.OpportunityItem_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItem" ToRole="OpportunityItemRevenuePlanReporting"/>
+</EntityType>
+<EntityType Name="OpportunityItemRevenuePlanReporting">
+    <Key>
+        <PropertyRef Name="ObjectID"/>
+    </Key>
+    <Property Name="DistributionAmount" Type="cust.Amount" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="DistributionDate" Type="Edm.DateTime" Nullable="true" Precision="8" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="ObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ParentObjectID" Type="Edm.String" Nullable="true" MaxLength="70" FixedLength="true" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+    <Property Name="ReportingCurrencyDistributionAmount" Type="cust.Amount" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <Property Name="RevenuePartnerUUID" Type="Edm.Guid" Nullable="true" sap:creatable="true" sap:updatable="true" sap:filterable="false"/>
+    <NavigationProperty Name="Opportunity" Relationship="cust.Opportunity_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItemRevenuePlanReporting" ToRole="Opportunity"/>
+    <NavigationProperty Name="OpportunityItem" Relationship="cust.OpportunityItem_OpportunityItemRevenuePlanReporting" FromRole="OpportunityItemRevenuePlanReporting" ToRole="OpportunityItem"/>
+</EntityType>
+```
+
 Please note that C4C OData API currently **DOES NOT** support the usage of properties from expanded navigations as part of $filter conditions. However, this can be achieved by applying the $filter condition at the child entity collection and then use an $expand condition to navigate to either the Parent collection or to the Header collection. 
 E.g. if the requirement is to get all Opportunities that have a certain Product, as a part of a single GET request, this could be achieved with the following query call:
 
-```
+```http
 /OpportunityItemCollection?$format=json&$filter=ProductID eq 'P300104'&$expand=Opportunity
 ```
 
 **Performance considerations:** Due to their complex nature, $expand queries require additional processing in comparison to the queries involving a single entity. Thus, in general $expand queries can be slow and in some cases considerably slow. While this should not impact the performance requirements of a result set with few records (e.g. single READ operation), when the result set contains a number of records, performance might not be ideal. Therefore, we recommend that applications should be designed accordingly and if $expand query doesn't meet the performance requirements, implement alternative methods. Due to the reasons above, queries involving $expand will only return the first 100 records and if there are more records matching the criteria, at the end of the result, a URL link to get next 100 records will be included. If a larger result set is desired, appropriate paging can be implemented via $skip and $top.
 
-
 #### $filter
 
 Option | Example | Description
 -------|---------|------------
-eq | /OpportunityCollection?$filter=AccountID eq '1001910' <br><br> /UserCollection?$filter=UserID eq '\*ADMIN\*'| Gets all Opportunity entries that matches the specified AccountID <br><br> Matches UserID containing the string ADMIN - '*' can be used as a wildcard.
+eq | /OpportunityCollection?\$filter=AccountID eq '1001910'  <br/><br/> /UserCollection?$filter=UserID eq '\*ADMIN\*'| Gets all Opportunity entries that matches the specified AccountID <br/><br/> Matches UserID containing the string ADMIN - '*' can be used as a wildcard.
 ge, le |  /OpportunityCollection?$filter=AccountID ge '1001910' and AccountID le '1001920' | Gets all Opportunity entries with AccountID within the specified range
 datetimeoffset| /AccountCollection?$filter=CreatedOn ge datetimeoffset'2015-04-01T00:00:00Z' | Accounts created on or after given datetime
-endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. **_Note that the Property Name has to be specified first_**.
-startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. **_Similar to endswith note that the Property Name has to be specified first_**.
+endswith | /AccountCollection?$filter=endswith(AccountName,'LLC') | All accounts whose AccountName ends with 'LLC'. <br/><br/> **_Note that the Property Name has to be specified first_**.
+startswith | /AccountCollection?$filter=startswith(AccountName,'Porter') | All accounts whose AccountName starts with 'Porter'. <br/><br/> **_Similar to endswith note that the Property Name has to be specified first_**.
 
 ##### Filtering for delta changes
+
 As of 1911 release, filtering for delta changes can be done using the property *EntityLastChangedOn*. For example, to get the number of Opportunities changed since (including) October 1st, 2019:
-```
+
+```http
 .../OpportunityCollection/$count?$filter=EntityLastChangedOn ge datetimeoffset’2019-10-01T00:00:00Z'
 
 ```
@@ -871,19 +894,19 @@ XML response with inlinecount. The Element <m:count> contains the response to th
 
 ```XML
 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/c4codataapi/">
-	<id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/OpportunityCollection</id>
-	<title type="text">OpportunityCollection</title>
-	<updated>2015-08-23T17:30:32Z</updated>
-	<author>
-		<name/>
-	</author>
-	<link href="OpportunityCollection" rel="self" title="OpportunityCollection"/>
-	<m:count>39080</m:count>
-	<entry>
-		<id>https://myNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</id>
-		<title type="text">OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</title>
-		<updated>2015-08-23T17:30:32Z</updated>
-		....
+    <id>https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/OpportunityCollection</id>
+    <title type="text">OpportunityCollection</title>
+    <updated>2015-08-23T17:30:32Z</updated>
+    <author>
+        <name/>
+    </author>
+    <link href="OpportunityCollection" rel="self" title="OpportunityCollection"/>
+    <m:count>39080</m:count>
+    <entry>
+        <id>https://myNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</id>
+        <title type="text">OpportunityCollection('00163E03A0701ED28BCEC7F4AA474109')</title>
+        <updated>2015-08-23T17:30:32Z</updated>
+        ....
 ```
 
 JSON response with inlinecount. The attribute __count contains the response to the $inlinecount.
@@ -901,35 +924,35 @@ JSON response with inlinecount. The attribute __count contains the response to t
           }, 
           "content": "Primo Sustainable products", 
           "languageCode": "E"
-        }, 
+        },
         ...
 ```
 
 #### $search
+
 Although it is not part of OData V2 specification, $search is supported by C4C OData API. Once $search is performed, C4C OData API compares the term provided to $search against the properties marked as $search relevant in OData Service Expolorer. Standard C4C OData services are delievered with $search relevant properties marked. 
 
 For custom OData services, it is possible to mark $search releveant entity properties individually as well as at the entity collection level. 
 
 Please note that the term passed to $search should not be bound by any quotes or double-quotes even when the term contains spaces. The following example shows the usage of the $search.:
 
-```
+```http
 https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codataapi/CustomerCollection?$search=test user
 ```
 
 **Note**: $search is not supported as part of a $batch request.
 
-
 ### ETag Support
+
 [HTTP ETag](https://en.wikipedia.org/wiki/HTTP_ETag) (entity tag) is mainly used for [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) and client side caching of data. Since C4C 1602, OData API provides support for weak validation of ETags.
 
-```
+```http
 W/"datetimeoffset'2016-04-27T23%3A07%3A31.6809330Z'"
 ```
 
 Each C4C entity has an associated ETag (which indicates the last updated datetime of that entity). Thus, when a collection of C4C entities are read, associated ETag of each entity is returned in its ETag ETag property. 
 
-
-```
+```JSON
 {
   "d": {
     "results": [
@@ -950,7 +973,7 @@ Each C4C entity has an associated ETag (which indicates the last updated datetim
         "UnitOfMeasureCode": "EA",
         "Description": "GS Marengo Womens Mountain Bike",
         "languageCode": "E",
-        "ETag": "/Date(1422997623532)/",	<============== ETag in the entity record
+        "ETag": "/Date(1422997623532)/",  <============== ETag in the entity record
         "StatusCodeText": "Blocked",
         "UnitOfMeasureCodeText": "Each",
         "languageCodeText": "English",
@@ -959,7 +982,7 @@ Each C4C entity has an associated ETag (which indicates the last updated datetim
 
 In the case where a single C4C Entity is read, in addition to the ETag property, the ETag is also returned as part of the response header.
 
-```
+```http
 c4c-odata-response-time →2061 ms
 cache-control →no-cache, no-store
 content-encoding →gzip
@@ -971,38 +994,33 @@ x-csrf-token →dQOr2DmqinUDkzVKub0L4A==
 ```
 
 #### Optimistic Concurrency Control with ETag
+
 When ETag is used for optimistic concurrency control following scenario is implemented:
 
-* Client application receives the ETag associated with the entity read
-* While modifiying the record in the server via HTTP PUT, PATCH or DELETE, the client sets the HTTP request header <i>If-Match</i> with the ETag previously read.
-* If ETag associated with the entity in the server matches the ETag passed in the request header, the call succeeds with <i>HTTP response 204</i>. (I.e. no other updates has been made since the client read the entity record)
-* Otherwise, the HTTP response gets the status <i>412 Precondition Failed</i> (i.e. The conurrency check fails)
+- Client application receives the ETag associated with the entity read
+- While modifiying the record in the server via HTTP PUT, PATCH or DELETE, the client sets the HTTP request header _If-Match_ with the ETag previously read.
+- If ETag associated with the entity in the server matches the ETag passed in the request header, the call succeeds with _HTTP response 204_. (I.e. no other updates has been made since the client read the entity record)
+- Otherwise, the HTTP response gets the status _412 Precondition Failed_ (i.e. The conurrency check fails)
 
 Example HTTP PUT request with concurrency control:
 
-```
-	PUT AccountCollection HTTP/1.1
-	host: <your tenant>
-	content-type: application/json
-	if-match: W/"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'"
-	x-csrf-token: dQOr2DmqinUDkzVKub0L4A==
+```http
+    PUT AccountCollection HTTP/1.1
+    host: <your tenant>
+    content-type: application/json
+    if-match: W/"datetimeoffset'2015-02-03T21%3A07%3A03.5328420Z'"
+    x-csrf-token: dQOr2DmqinUDkzVKub0L4A==
 
-	{
-		"AccountName":"New Name of the account"
-	}
-
+    {
+        "AccountName":"New Name of the account"
+    }
 ```
 
 ## Sample Payloads
 
-  * [Service Ticket](sections/serviceticket.md)
-  * [Mass query pattern](sections/massquery.md)
-  * [Sample C4C OData API V2 calls](sections/odataapi_v2_samples.md)
+- [Service Ticket](sections/serviceticket.md)
+- [Mass query pattern](sections/massquery.md)
+- [Sample C4C OData API V2 calls](sections/odataapi_v2_samples.md)
 
-
-
-<hr>
-<center>End of File</center>
-
-
-
+---
+End of File
