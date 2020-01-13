@@ -15,6 +15,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
     - [SAP Standard vs. Custom OData Services](#sap-standard-vs-custom-odata-services)
     - [OData Service Document](#odata-service-document)
     - [OData Service Metadata](#odata-service-metadata)
+      - [Filtering Metadata](#filtering-metadata)
     - [Supported HTTP operations](#supported-http-operations)
     - [SAP Cloud for Customer Annotations](#sap-cloud-for-customer-annotations)
     - [Known Limitations](#known-limitations)
@@ -101,7 +102,7 @@ OData service metadata is retrieved via the following URL.
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata
 ```
 
-Labals for the entities and their properties can be retrieved by appending the query parameter _sap-label=true_.
+Labels for the entities and their properties can be retrieved by appending the query parameter _sap-label=true_.
 
 ```http
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?sap-label=true
@@ -113,6 +114,15 @@ For example, to receive the UI labels in Turkish the HTTP request header should 
 
 ```http
 Accept-Language:tr
+```
+
+#### Filtering Metadata
+
+OData service metadata can be filtered for specific EntityTypes using the _$filter_ query parameter.
+
+For example the following request will return the metadata for _ServiceRequest_ and _Opportunity_ EntityTypes.
+```http
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?$filter=ServiceRequest
 ```
 
 ### Supported HTTP operations
