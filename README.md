@@ -118,11 +118,11 @@ Accept-Language:tr
 
 #### Filtering Metadata
 
-OData service metadata can be filtered for specific EntityTypes using the _$filter_ query parameter.
+OData service metadata can be filtered for specific EntityTypes (including all dependent EntityTypes) using the _$filter_ query parameter.
 
 For example the following request will return the metadata for _ServiceRequest_ and _Opportunity_ EntityTypes.
 ```http
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?$filter=ServiceRequest
+https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?$filter=ServiceRequest,Opportunity
 ```
 
 ### Supported HTTP operations
