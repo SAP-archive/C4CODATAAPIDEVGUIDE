@@ -96,10 +96,16 @@ where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ charact
 
 ### OData Service Metadata
 
-OData service metadata is retrieved via the following URL.
+OData service metadata is retrieved via the following URL. (ObjectID as the key)
 
 ```http
 https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata
+```
+
+OData service metadata is retrieved via the following URL. (User-friendly ID as the key)
+
+```http
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/uid/v1/c4codataapi/$metadata.
 ```
 
 Labels for the entities and their properties can be retrieved by appending the query parameter _sap-label=true_.
