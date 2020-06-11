@@ -950,11 +950,19 @@ Although it is not part of OData V2 specification, $search is supported by C4C O
 
 For custom OData services, it is possible to mark $search releveant entity properties individually as well as at the entity collection level. 
 
-Please note that the term passed to $search should not be bound by any quotes or double-quotes even when the term contains spaces. The following example shows the usage of the $search.:
+Please note that the term passed to $search can be bound with single-quotes or not quotes at all (Double-quotes not supported). The following example shows the usage of the $search.:
 
 ```http
 https://myNNNNNN.crm.ondemand.com/sap/byd/odata/cust/v1/c4codataapi/CustomerCollection?$search=test user
 ```
+##### $Search rules
+
+* Each provided value is evaluated for an exact match. E.g. “$search=Mustafa” will match a search relevant value “Mustafa 1705 Test” but, “$search=Mus” will not.
+* The \* (asterisk) character can be used as a wildcard. E.g. “$search=Mus*” will match “Mustafa 1705 Test” as well as “Mustangs”
+* Multiple search values with spaces between them will be evaluated with a logical AND operation. Logical OR operation is not supported.
+* $search results can be sorted via $orderby
+* $search and $filter can be used together in the same request - the matching results must satisfy the conditions set in both $search and $filter i.e. logical AND.
+* Properties supporting $search are documented in [C4C OData API reference](https://help.sap.com/doc/d0f9ba822c08405da7d88174b304df84/CLOUD/en-US/index.html).
 
 **Note**: $search is not supported as part of a $batch request.
 
