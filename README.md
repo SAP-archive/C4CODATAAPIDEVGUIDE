@@ -1,8 +1,8 @@
 # SAP Cloud for Customer OData API Developer's Guide
 
-The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/e4d5b5e4f6d847f7ad2025f5f343e03f.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
+The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/CLOUD/en-US/6cb5cd1ebe1c49d8b99c22afa29aa5d4.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
-For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Documentation](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/latest/en-US/6c0a463cc9ca450cbd01a9a5057ce682.html).
+For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Documentation](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/CLOUD/en-US).
 
 ## Table of Contents
 <!-- MarkdownTOC -->
@@ -69,13 +69,13 @@ OData Service Catalog contains the list of available OData Services in the corre
 https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/ODataServiceCollection
 ```
 
-The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html).
+The catalog service returns both standard OData services delivered by SAP as well as the custom services that you may have modeled in your tenant using the [OData Service Explorer](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/CLOUD/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html).
 
 ### SAP Standard vs. Custom OData Services
 
 SAP Cloud for Customer provides a standard OData API. In addition, SAP Cloud for Customer also allows customers to build their own (custom) OData services based on the predefined business objects in the solution.
 
-[OData Service Explorer](https://help.sap.com/viewer/26fdb8fadd5b4becb5c858d92146d0e0/1708/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html) is a key user tool that allows exploring and testing SAP provided OData API as well as building custom services.
+[OData Service Explorer](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/CLOUD/en-US/8e4220fa6dc943ef891fb3d0e91515d3.html) is a key user tool that allows exploring and testing SAP provided OData API as well as building custom services.
 
 Standard and custom OData services offer the same capabilities and, are subjected to the same restrictions. 
 
