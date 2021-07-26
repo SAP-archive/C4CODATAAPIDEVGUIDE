@@ -89,7 +89,7 @@ The following URL pattern differetiates the Standard and Custom OData services.
 OData service document contains the list of OData entities (a.k.a. collections) contained within that OData service. In order to retrieve the complete list of entity sets included in C4C OData service, you can open the following URL in your browser.
 
 ```http
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/
 ```
 
 where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ character at the end of the URI is required!)
@@ -99,7 +99,7 @@ where myNNNNNN is the name of your C4C tenant. (Please note that ‘/’ charact
 OData service metadata is retrieved via the following URL. (ObjectID as the key)
 
 ```http
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/$metadata
 ```
 
 OData service metadata is retrieved via the following URL. (User-friendly ID as the key)
@@ -111,7 +111,7 @@ https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/uid/v1/c4codataapi/$metadata.
 Labels for the entities and their properties can be retrieved by appending the query parameter _sap-label=true_.
 
 ```http
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?sap-label=true
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/$metadata?sap-label=true
 ```
 
 To receive the UI labels in a particular language HTTP header Accept-Language can be used. Prefered language code can be set based on [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1).
@@ -128,7 +128,7 @@ OData service metadata can be filtered for specific EntityTypes (including all d
 
 For example the following request will return the metadata for _ServiceRequest_ and _Opportunity_ EntityTypes.
 ```http
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/c4codataapi/$metadata?$filter=ServiceRequest,Opportunity
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/$metadata?$filter=ServiceRequest,Opportunity
 ```
 
 ### Supported HTTP operations
@@ -186,7 +186,7 @@ SAP Cloud for Customer OData API supports HTTP request and response payloads in 
 Example:
 
 ```http
-https://myNNNNNN.crm.ondemand/sap/c4c/odata/v1/odataservicecatalog/?$format=json
+https://myNNNNNN.crm.ondemand.com/sap/c4c/odata/v1/odataservicecatalog/?$format=json
 ```
 
 will return
