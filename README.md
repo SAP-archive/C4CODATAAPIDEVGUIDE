@@ -1,5 +1,7 @@
 # SAP Cloud for Customer OData API Developer's Guide
 
+[![REUSE status](https://api.reuse.software/badge/github.com/SAP/C4CODATAAPIDEVGUIDE)](https://api.reuse.software/info/github.com/SAP/C4CODATAAPIDEVGUIDE)
+
 The SAP Cloud for Customer OData API Developer’s Guide complements the [SAP Cloud for Customer OData API Reference](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/CLOUD/en-US/6cb5cd1ebe1c49d8b99c22afa29aa5d4.html) with usage details and samples for SAP Cloud for Customer OData API in a format that is most convenient to developers. Furthermore, it also covers known restrictions and limitations of the SAP Cloud for Customer OData API.
 
 For a brief introduction to SAP Cloud for Customer OData API, please refer to [SAP Cloud for Customer OData API Documentation](https://help.sap.com/viewer/1364b70b9cbb417ea5e2d80e966d4f49/CLOUD/en-US).
@@ -38,6 +40,7 @@ For a brief introduction to SAP Cloud for Customer OData API, please refer to [S
     - [ETag Support](#etag-support)
       - [Optimistic Concurrency Control with ETag](#optimistic-concurrency-control-with-etag)
   - [Sample Payloads](#sample-payloads)
+  - [Licensing](#licensing)
 
 <!-- /MarkdownTOC -->
 
@@ -1046,5 +1049,6 @@ Example HTTP PUT request with concurrency control:
 - [Mass query pattern](sections/massquery.md)
 - [Sample C4C OData API V2 calls](sections/odataapi_v2_samples.md)
 
----
-End of File
+## Licensing
+
+Copyright 2015-2021 SAP SE or an SAP affiliate company and C4CODATAAPIDEVGUIDE contributors. Please see our [LICENSE](LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/SAP/C4CODATAAPIDEVGUIDE).
